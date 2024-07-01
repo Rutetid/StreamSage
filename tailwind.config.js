@@ -18,6 +18,7 @@ export default {
 				primary: "#8fbde5",
 				secondary: "#851e63",
 				accent: "#d5504d",
+				top:"#111111",
 				"grad-start": "#8fbde5",
 				"grad-end": "#D5504D",
 			},
