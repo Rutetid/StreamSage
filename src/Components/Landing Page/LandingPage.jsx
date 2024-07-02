@@ -1,4 +1,9 @@
 import Card from "./Card";
+import Anime from "../../assets/anime.jpg";
+import Movie from "../../assets/Movie.jpg";
+import Drama from "../../assets/Drama.jpg";
+import WebSeries from "../../assets/got.jpg";
+
 
 function LandingPage() {
   return (
@@ -42,11 +47,11 @@ function LandingPage() {
 					</button>
 				</div>
 
-				<div className="flex col-span-3 gap-12 mx-52 py-24  ">
-					<Card></Card>
-					<Card></Card>
-					<Card></Card>
-					<Card></Card>
+				<div className="flex col-span-3 gap-12 3xl:px-72 px-52 py-24 justify-around items-center  ">
+					<Card img={Movie} genre={"Movies"} />
+					<Card img={Drama} genre={"Drama"} />
+					<Card img={WebSeries} genre={"Web Series"} />
+					<Card img={Anime} genre={"Anime"} />
 				</div>
 			</div>
 		);
