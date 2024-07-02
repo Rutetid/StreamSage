@@ -18,15 +18,18 @@ export default {
 				primary: "#8fbde5",
 				secondary: "#851e63",
 				accent: "#d5504d",
-				top:"#111111",
+				top: "#020508",
 				"grad-start": "#8fbde5",
 				"grad-end": "#D5504D",
+			},
+			screens: {
+				"3xl": "1920px", 
 			},
 		},
 	},
 	plugins: [
 		require("@tailwindcss/typography"),
-		function ({ addUtilities }) {
+		({ addUtilities }) => {
 			const newUtilities = {
 				".gradient-text": {
 					background: "linear-gradient(to right, var(--tw-gradient-stops))",
