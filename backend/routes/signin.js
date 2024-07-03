@@ -14,7 +14,7 @@ router.post("/signin" , async (req,res)=>{
 
     if(!success ){
         return res.status(411).json({
-            message : "Incorredct input"
+            message : "Incorrect input"
         })
     }
 
