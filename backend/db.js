@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 const { userInfo } = require("os");
 
-mongoose.connect("mongodb+srv://Prashant:PfG3COpqomJ5Ci3R@zealdris.kelwkym.mongodb.net/Paytm");
+mongoose.connect("mongodb+srv://Prashant:PfG3COpqomJ5Ci3R@zealdris.kelwkym.mongodb.net/StreamSage");
 
 const userSchema = new mongoose.Schema({
     username : {
