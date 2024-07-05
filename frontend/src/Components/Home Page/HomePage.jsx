@@ -3,7 +3,12 @@ import Navbar from "./Navbar";
 import SampleCard from "./SampleCard";
 import Anime from "../../assets/anime.jpg";
 
+
 const HomePage = () => {
+
+	
+
+
 	return (
 		<div className="min-h-screen bg-background">
 			<Navbar />
@@ -21,10 +26,10 @@ const HomePage = () => {
 				</span>
 
 				<div className="flex col-span-4 gap-12 3xl:px-32 px-40 pt-12 justify-around items-center">
-					<SampleCard img={Anime} genre={"Anime"} />
-					<SampleCard img={Anime} genre={"Anime"} />
-					<SampleCard img={Anime} genre={"Anime"} />
-					<SampleCard img={Anime} genre={"Anime"} />
+						<SampleCard img={Anime} genre={"Anime"} />
+						<SampleCard img={Anime} genre={"Anime"} />
+						<SampleCard img={Anime} genre={"Anime"} />
+						<SampleCard img={Anime} genre={"Anime"} />
 				</div>
 			</div>
 
@@ -45,7 +50,7 @@ const HomePage = () => {
 			<div className="pt-32">
 				<span className="font-poppins font-bold text-3xl text-text ml-40">
 					{" "}
-					Top Animeo
+					Top Anime
 				</span>
 
 				<div className="flex col-span-4 gap-12 3xl:px-32 px-40 pt-12 justify-around items-center">
