@@ -1,7 +1,9 @@
 const mongoose = require("mongoose");
 const { userInfo } = require("os");
 
-mongoose.connect("mongodb+srv://Prashant:PfG3COpqomJ5Ci3R@zealdris.kelwkym.mongodb.net/StreamSage");
+require("dotenv").config();
+
+mongoose.connect(process.env.MONGO_URI);
 
 const userSchema = new mongoose.Schema({
     username : {
