@@ -2,13 +2,9 @@ import React from "react";
 import Navbar from "./Navbar";
 import SampleCard from "./SampleCard";
 import Anime from "../../assets/anime.jpg";
-import Trending from "./Trending";
+import Trending from "./MyCarousel";
 
 const HomePage = () => {
-
-	
-
-
 	return (
 		<div className="min-h-screen bg-background">
 			<Navbar />
@@ -21,8 +17,6 @@ const HomePage = () => {
 				<div className="flex 3xl:px-32 px-40 pt-12 ">
 					<Trending />
 				</div>
-
-				
 			</div>
 
 			<div className="pt-32">
