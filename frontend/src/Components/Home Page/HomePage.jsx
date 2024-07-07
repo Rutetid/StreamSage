@@ -14,7 +14,7 @@ const HomePage = () => {
 					Trending{" "}
 				</h1>
 
-				<div className="flex 3xl:px-32 px-40 pt-12 ">
+				<div className="flex 3xl:px-32 px-6 pt-12 ">
 					<Trending />
 				</div>
 			</div>

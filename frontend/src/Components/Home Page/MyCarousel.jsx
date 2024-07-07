@@ -45,7 +45,7 @@ const MyCarousel = () => {
 						}}
 					>
 						{movies.map((movie, i) => (
-							<div key={i} className="flex-shrink-0 w-1/6 p-3  ">
+							<div key={i} className="flex-shrink-0 w-1/6 p-1  ">
 								<div className="bg-gray-900 rounded-xl shadow-lg">
 									<img
 										src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
@@ -54,8 +54,8 @@ const MyCarousel = () => {
 									/>
 								</div>
 								<div className="pt-4">
-									<span className="text-text text-2xl font-poppins font-semibold">
-										{movie.title}
+									<span className="text-text text-sm font-poppins font-semibold">
+										{movie.title || movie.name}
 									</span>
 								</div>
 							</div>
