@@ -1,20 +1,8 @@
 import React, { useState } from "react";
-
+import movies from "../../assets/Trending.json";
 
 const Trending = () => {
-
 	
-	const movies = [
-		{ title: "Oppenhiemer", image: "https://m.media-amazon.com/images/M/MV5BMDBmYTZjNjUtN2M1MS00MTQ2LTk2ODgtNzc2M2QyZGE5NTVjXkEyXkFqcGdeQXVyNzAwMjU2MTY@._V1_.jpg" },
-		{ title: "Movie 2", image: "https://m.media-amazon.com/images/M/MV5BMDBmYTZjNjUtN2M1MS00MTQ2LTk2ODgtNzc2M2QyZGE5NTVjXkEyXkFqcGdeQXVyNzAwMjU2MTY@._V1_.jpg" },
-		{ title: "Movie 3", image: "https://m.media-amazon.com/images/M/MV5BMDBmYTZjNjUtN2M1MS00MTQ2LTk2ODgtNzc2M2QyZGE5NTVjXkEyXkFqcGdeQXVyNzAwMjU2MTY@._V1_.jpg" },
-		{ title: "Movie 4", image: "https://m.media-amazon.com/images/M/MV5BMDBmYTZjNjUtN2M1MS00MTQ2LTk2ODgtNzc2M2QyZGE5NTVjXkEyXkFqcGdeQXVyNzAwMjU2MTY@._V1_.jpg" },
-		{ title: "Movie 5", image: "https://m.media-amazon.com/images/M/MV5BMDBmYTZjNjUtN2M1MS00MTQ2LTk2ODgtNzc2M2QyZGE5NTVjXkEyXkFqcGdeQXVyNzAwMjU2MTY@._V1_.jpg" },
-		{ title: "Movie 6", image: "https://m.media-amazon.com/images/M/MV5BMDBmYTZjNjUtN2M1MS00MTQ2LTk2ODgtNzc2M2QyZGE5NTVjXkEyXkFqcGdeQXVyNzAwMjU2MTY@._V1_.jpg" },
-		{ title: "Movie 7", image: "https://m.media-amazon.com/images/M/MV5BMDBmYTZjNjUtN2M1MS00MTQ2LTk2ODgtNzc2M2QyZGE5NTVjXkEyXkFqcGdeQXVyNzAwMjU2MTY@._V1_.jpg" },
-		{ title: "Movie 8", image: "https://m.media-amazon.com/images/M/MV5BMDBmYTZjNjUtN2M1MS00MTQ2LTk2ODgtNzc2M2QyZGE5NTVjXkEyXkFqcGdeQXVyNzAwMjU2MTY@._V1_.jpg" },
-		];
-
 	const [currentIndex, setCurrentIndex] = useState(0);
 
 	const nextSlide = () => {
@@ -44,16 +32,16 @@ const Trending = () => {
 				>
 					{movies.map((movie, index) => (
 						// biome-ignore lint/suspicious/noArrayIndexKey: <explanation>
-					<div key={index} className="flex-shrink-0 w-1/4 p-5 ">
+						<div key={index} className="flex-shrink-0 w-1/4 p-5 ">
 							<div className="bg-gray-900 rounded-lg  shadow-lg">
 								<img
-									src={movie.image}
+									src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
 									alt={movie.title}
-									className="w-full h-96 object-cover rounded-sm shadow-lg"
+									className="w-full h-96 object-contain rounded-sm shadow-lg "
 								/>
 							</div>
 							<div className="pt-4 3xl:w-80 3xl:h-auto">
-								<span className="text-text text-2xl 3xl:text-3xl font-poppins font-semibold ">
+								<span className="text-text text-sm 3xl:text-3xl font-poppins font-semibold ">
 									{movie.title}
 								</span>
 							</div>
