@@ -21,7 +21,7 @@ const Trending = () => {
 		setCurrentIndex((prevIndex) => (prevIndex + 4) % movies.length);
 	};
 
-	const prevSlide = () => {
+	const prevSlide = () => {	
 		setCurrentIndex(
 			(prevIndex) => (prevIndex - 4 + movies.length) % movies.length,
 		);
