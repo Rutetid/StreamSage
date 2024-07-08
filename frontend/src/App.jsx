@@ -5,7 +5,7 @@ import Login from "./Components/Landing Page/Login";
 import Signup from "./Components/Landing Page/Signup";
 
 function App() {
-	return <Signup/>
+	return <HomePage/>
 }
 
 export default App;

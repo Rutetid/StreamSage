@@ -18,6 +18,22 @@ const MyCarousel = () => {
     setIndex(newIndex >= length ? 0 : newIndex);
   };
 
+  const addToList = () => {
+
+	fetch("a.com" ,{
+		method: 'POST',
+		headers: {
+			'Content-Type': 'application/json'
+		},
+		body: JSON.stringify({
+			"movie": movies[index]
+		})
+	}).then(res => res.json())
+	.then(data => console.log(data))
+	.catch(err => console.log(err))
+
+  }
+
   return (
 			<div className="Trending flex items-center justify-center w-full relative bg-background">
 				<button
@@ -39,7 +55,11 @@ const MyCarousel = () => {
 							// biome-ignore lint/suspicious/noArrayIndexKey: <explanation>
 							<div key={i} className="flex-shrink-0 w-1/6 p-1  ">
 								<div className="bg-gray-900 rounded-xl shadow-lg relative">
-									<input type='checkbox' className="absolute bottom-0 right-0 m-2 p-2 bg-white rounded-sm " />
+									<input type='checkbox' className="absolute bottom-0 right-0 m-2 p-2 bg-white rounded-sm " 
+									onChange={(e) => {
+										addToList()
+									}}
+									/>
 									<img
 										src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
 										alt={movie.title}
