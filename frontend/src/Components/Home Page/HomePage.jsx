@@ -9,12 +9,12 @@ const HomePage = () => {
 		<div className="min-h-screen bg-background">
 			<Navbar />
 			<div>
-				<h1 className="font-poppins font-bold text-6xl text-text flex justify-center pt-12 ">
+				<h1 className="font-poppins font-bold text-6xl text-text flex justify-center pt-20 ">
 					{" "}
 					Trending{" "}
 				</h1>
 
-				<div className="flex 3xl:px-32 px-6 pt-12 ">
+				<div className="flex 3xl:px-32 px-6 pt-20 ">
 					<Trending />
 				</div>
 			</div>

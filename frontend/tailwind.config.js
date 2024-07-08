@@ -15,6 +15,7 @@ export default {
 			colors: {
 				text: "#ddeef8",
 				background: "#040a10",
+				bglight: "#0a1929",
 				primary: "#8fbde5",
 				secondary: "#851e63",
 				accent: "#d5504d",
@@ -23,7 +24,7 @@ export default {
 				"grad-end": "#D5504D",
 			},
 			screens: {
-				"3xl": "1920px", 
+				"3xl": "1920px",
 			},
 		},
 	},

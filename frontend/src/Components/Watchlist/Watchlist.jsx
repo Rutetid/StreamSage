@@ -24,7 +24,7 @@ const Watchlist = () => {
 						</div>
 					</div>
 
-					<div className="h-16 bg-text mx-48 mt-16 flex items-center font-poppins font-bold text-2xl">
+					<div className="h-16 bg-primary mx-48 mt-16 flex items-center font-poppins font-bold text-2xl">
 						<div className="w-1/12 flex justify-center">#</div>
 						<div className="w-7/12 ">Title</div>
 						<div className="w-2/12 flex justify-start">Rating</div>

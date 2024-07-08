@@ -1,16 +1,7 @@
 import React, { useState } from 'react';
 import movies from "../../assets/Trending.json";
+import Input from 'postcss/lib/input';
 
-const moviess = [
-  { title: "Oppenheimer", image: "https://m.media-amazon.com/images/M/MV5BMDBmYTZjNjUtN2M1MS00MTQ2LTk2ODgtNzc2M2QyZGE5NTVjXkEyXkFqcGdeQXVyNzAwMjU2MTY@._V1_.jpg" },
-  { title: "Movie 2", image: "https://m.media-amazon.com/images/M/MV5BMDBmYTZjNjUtN2M1MS00MTQ2LTk2ODgtNzc2M2QyZGE5NTVjXkEyXkFqcGdeQXVyNzAwMjU2MTY@._V1_.jpg" },
-  { title: "Movie 3", image: "https://m.media-amazon.com/images/M/MV5BMDBmYTZjNjUtN2M1MS00MTQ2LTk2ODgtNzc2M2QyZGE5NTVjXkEyXkFqcGdeQXVyNzAwMjU2MTY@._V1_.jpg" },
-  { title: "Movie 4", image: "https://m.media-amazon.com/images/M/MV5BMDBmYTZjNjUtN2M1MS00MTQ2LTk2ODgtNzc2M2QyZGE5NTVjXkEyXkFqcGdeQXVyNzAwMjU2MTY@._V1_.jpg" },
-  { title: "Movie 5", image: "https://m.media-amazon.com/images/M/MV5BMDBmYTZjNjUtN2M1MS00MTQ2LTk2ODgtNzc2M2QyZGE5NTVjXkEyXkFqcGdeQXVyNzAwMjU2MTY@._V1_.jpg" },
-  { title: "Movie 6", image: "https://m.media-amazon.com/images/M/MV5BMDBmYTZjNjUtN2M1MS00MTQ2LTk2ODgtNzc2M2QyZGE5NTVjXkEyXkFqcGdeQXVyNzAwMjU2MTY@._V1_.jpg" },
-  { title: "Movie 7", image: "https://m.media-amazon.com/images/M/MV5BMDBmYTZjNjUtN2M1MS00MTQ2LTk2ODgtNzc2M2QyZGE5NTVjXkEyXkFqcGdeQXVyNzAwMjU2MTY@._V1_.jpg" },
-  { title: "Movie 8", image: "https://m.media-amazon.com/images/M/MV5BMDBmYTZjNjUtN2M1MS00MTQ2LTk2ODgtNzc2M2QyZGE5NTVjXkEyXkFqcGdeQXVyNzAwMjU2MTY@._V1_.jpg" },
-];
 
 const MyCarousel = () => {
   const [index, setIndex] = useState(0);
@@ -26,6 +17,22 @@ const MyCarousel = () => {
     const newIndex = index + cardsPerView;
     setIndex(newIndex >= length ? 0 : newIndex);
   };
+
+  const addToList = () => {
+
+	fetch("a.com" ,{
+		method: 'POST',
+		headers: {
+			'Content-Type': 'application/json'
+		},
+		body: JSON.stringify({
+			"movie": movies[index]
+		})
+	}).then(res => res.json())
+	.then(data => console.log(data))
+	.catch(err => console.log(err))
+
+  }
 
   return (
 			<div className="Trending flex items-center justify-center w-full relative bg-background">
@@ -45,8 +52,14 @@ const MyCarousel = () => {
 						}}
 					>
 						{movies.map((movie, i) => (
+							// biome-ignore lint/suspicious/noArrayIndexKey: <explanation>
 							<div key={i} className="flex-shrink-0 w-1/6 p-1  ">
-								<div className="bg-gray-900 rounded-xl shadow-lg">
+								<div className="bg-gray-900 rounded-xl shadow-lg relative">
+									<input type='checkbox' className="absolute bottom-0 right-0 m-2 p-2 bg-white rounded-sm " 
+									onChange={(e) => {
+										addToList()
+									}}
+									/>
 									<img
 										src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
 										alt={movie.title}
