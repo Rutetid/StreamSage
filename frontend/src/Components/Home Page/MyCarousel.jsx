@@ -18,15 +18,15 @@ const MyCarousel = () => {
     setIndex(newIndex >= length ? 0 : newIndex);
   };
 
-  const addToList = () => {
+  const addToList = (movie) => {
 
-	fetch("a.com" ,{
+	fetch("http://localhost:3000/api/v1/watchlist/user" ,{
 		method: 'POST',
 		headers: {
 			'Content-Type': 'application/json'
 		},
 		body: JSON.stringify({
-			"movie": movies[index]
+			movie: movie
 		})
 	}).then(res => res.json())
 	.then(data => console.log(data))
@@ -56,8 +56,8 @@ const MyCarousel = () => {
 							<div key={i} className="flex-shrink-0 w-1/6 p-1  ">
 								<div className="bg-gray-900 rounded-xl shadow-lg relative">
 									<input type='checkbox' className="absolute bottom-0 right-0 m-2 p-2 bg-white rounded-sm " 
-									onChange={(e) => {
-										addToList()
+									onChange={() => {
+										addToList(movie)
 									}}
 									/>
 									<img
