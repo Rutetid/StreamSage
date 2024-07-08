@@ -1,6 +1,6 @@
 const express = require("express");
 const router = express.Router();
-const {User} =require("../db");
+const {User , List} =require("../db");
 const zod = require("zod");
 const jwt = require("jsonwebtoken");
 const {JWT_SECRET} = require("../config");
@@ -31,10 +31,12 @@ router.post("/signup" , async (req,res)=>{
         })
     }
     const user = await User.create(req.body);
-
     userId = user._id;
+    
+    const list = await List.create({"userId" : userId  } );
+    
 
-    const token = jwt.sign({userId},JWT_SECRET,{ expiresIn: '1h' });
+    const token = jwt.sign({userId},JWT_SECRET);
 
     res.json({
         message : "User Created Successfully",
