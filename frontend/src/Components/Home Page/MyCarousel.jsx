@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import movies from "../../assets/Trending.json";
+import Input from 'postcss/lib/input';
 
 
 const MyCarousel = () => {
@@ -36,7 +37,8 @@ const MyCarousel = () => {
 					>
 						{movies.map((movie, i) => (
 							<div key={i} className="flex-shrink-0 w-1/6 p-1  ">
-								<div className="bg-gray-900 rounded-xl shadow-lg">
+								<div className="bg-gray-900 rounded-xl shadow-lg relative">
+									<input type='checkbox' className="absolute bottom-0 right-0 m-2 p-2 bg-white rounded-sm " />
 									<img
 										src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
 										alt={movie.title}

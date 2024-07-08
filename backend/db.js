@@ -5,7 +5,7 @@ require("dotenv").config();
 
 mongoose.connect(process.env.MONGO_URI);
 
-cconst userSchema = new mongoose.Schema({
+const userSchema = new mongoose.Schema({
     username : {
         type : String ,
         minLength : 3,
