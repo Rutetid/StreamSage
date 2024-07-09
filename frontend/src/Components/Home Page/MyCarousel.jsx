@@ -20,7 +20,7 @@ const MyCarousel = () => {
 
   const addToList = (movie) => {
 
-	fetch("http://localhost:3000/api/v1/watchlist/user" ,{
+	fetch("http://localhost:3000/api/v1/watchlist/add" ,{
 		method: 'POST',
 		headers: {
 			'Content-Type': 'application/json'

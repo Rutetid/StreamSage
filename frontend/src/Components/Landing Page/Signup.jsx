@@ -1,7 +1,16 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { useState, useEffect } from "react";
+
+const axios = require("axios");
 
 const Signup = () => {
+	const [username, setUsername] = React.useState("");
+	const [password, setPassword] = React.useState("");
+	const [firstname, setFirstname] = React.useState("");
+	const [lastname, setLastname] = React.useState("");
+
+
 	return (
 		<div>
 			<section className="bg-gray-50 dark:bg-background">
@@ -32,6 +41,7 @@ const Signup = () => {
 										className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary focus:border-primary block w-full p-2.5 dark:bg-text dark:border-gray-600 dark:placeholder-gray-400  dark:focus:ring-blue-500 dark:focus:border-blue-500"
 										placeholder="name@company.com"
 										required
+										onChange={(e) => setUsername(e.target.value)}
 									/>
 								</div>
 								<div className="flex items-center gap-6">
@@ -44,11 +54,12 @@ const Signup = () => {
 										</label>
 										<input
 											type="text"
-											name="fname"
-											id="fname"
+											name="firstname"
+											id="firstname"
 											className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary focus:border-primary block w-full p-2.5 dark:bg-text dark:border-gray-600 dark:placeholder-gray-400  dark:focus:ring-blue-500 dark:focus:border-blue-500"
 											placeholder="John"
 											required
+											onChange={(e) => setFirstname(e.target.value)}
 										/>
 									</div>
 									<div>
@@ -60,11 +71,12 @@ const Signup = () => {
 										</label>
 										<input
 											type="text"
-											name="lname"
-											id="lname"
+											name="lastname"
+											id="lastname"
 											className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary focus:border-primary block w-full p-2.5 dark:bg-text dark:border-gray-600 dark:placeholder-gray-400  dark:focus:ring-blue-500 dark:focus:border-blue-500"
 											placeholder="Doe"
 											required
+											onChange={(e) => setLastname(e.target.value)}
 										/>
 									</div>
 								</div>
@@ -82,22 +94,7 @@ const Signup = () => {
 										placeholder="••••••••"
 										className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary focus:border-primary block w-full p-2.5 dark:bg-text dark:border-gray-600 dark:placeholder-gray-400  dark:focus:ring-blue-500 dark:focus:border-blue-500"
 										required
-									/>
-								</div>
-								<div>
-									<label
-										htmlFor="confirm-password"
-										className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-									>
-										Confirm password
-									</label>
-									<input
-										type="password"
-										name="confirm-password"
-										id="confirm-password"
-										placeholder="••••••••"
-										className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary focus:border-primary block w-full p-2.5 dark:bg-text dark:border-gray-600 dark:placeholder-gray-400 dark:text- dark:focus:ring-blue-500 dark:focus:border-blue-500"
-										required
+										onChange={(e) => setPassword(e.target.value)}
 									/>
 								</div>
 								<div className="flex items-start">
@@ -127,7 +124,9 @@ const Signup = () => {
 								</div>
 								<button
 									type="submit"
-									className="w-full bg-primary hover:bg-primary focus:ring-4 focus:outline-none focus:ring-primary font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary dark:hover:bg-primary dark:focus:ring-primary"
+									className="w-full bg-primary hover:bg-primary focus:	ring-4 focus:outline-none focus:ring-primary font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary dark:hover:bg-primary dark:focus:ring-primary"
+									
+									
 								>
 									Create an account
 								</button>

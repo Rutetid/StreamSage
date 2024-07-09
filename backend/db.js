@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
-const { userInfo } = require("os");
-const { json } = require("stream/consumers");
-const { isBooleanObject } = require("util/types");
+const { userInfo } = require("node:os");
+const { json } = require("node:stream/consumers");
+const { isBooleanObject } = require("node:util/types");
 const { boolean } = require("zod");
 
 require("dotenv").config();
