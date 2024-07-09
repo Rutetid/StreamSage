@@ -19,6 +19,7 @@ const Signup = () => {
         firstname,
         lastname,
       });
+	  localStorage.setItem("token" , response.data.token);
     } catch (error) {
       console.error("There was an error!", error);
     }
