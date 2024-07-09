@@ -1,8 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { useState, useEffect } from "react";
-
-const axios = require("axios");
+import axios from "axios";	
 
 const Signup = () => {
 	const [username, setUsername] = React.useState("");
@@ -10,6 +9,20 @@ const Signup = () => {
 	const [firstname, setFirstname] = React.useState("");
 	const [lastname, setLastname] = React.useState("");
 
+	const handleSubmit = async (e) => {
+    e.preventDefault(); 
+
+    try {
+      const response = await axios.post("http://localhost:3000/api/v1/user/signup", {
+        username,
+        password,
+        firstname,
+        lastname,
+      });
+    } catch (error) {
+      console.error("There was an error!", error);
+    }
+  };
 
 	return (
 		<div>
@@ -22,11 +35,12 @@ const Signup = () => {
 						STREAMSAGE
 					</Link>
 					<div className="w-full bg-white rounded-lg shadow dark:border md:mt-0 sm:max-w-md xl:p-0 dark:bg-bglight dark:border-gray-700">
+						 
 						<div className="p-6 space-y-4 md:space-y-6 sm:p-8">
 							<h1 className="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white">
 								Create an account
 							</h1>
-							<form className="space-y-4 md:space-y-6" action="#">
+							<form className="space-y-4 md:space-y-6" action="#" onSubmit={handleSubmit}>
 								<div>
 									<label
 										htmlFor="email"
@@ -124,10 +138,7 @@ const Signup = () => {
 								</div>
 								<button
 									type="submit"
-									className="w-full bg-primary hover:bg-primary focus:	ring-4 focus:outline-none focus:ring-primary font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary dark:hover:bg-primary dark:focus:ring-primary"
-									
-									
-								>
+									className="w-full bg-primary hover:bg-primary focus:	ring-4 focus:outline-none focus:ring-primary font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary dark:hover:bg-primary dark:focus:ring-primary">
 									Create an account
 								</button>
 								<p className="text-sm font-light text-gray-500 dark:text-gray-400">
