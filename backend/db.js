@@ -1,5 +1,8 @@
 const mongoose = require("mongoose");
 const { userInfo } = require("os");
+const { json } = require("stream/consumers");
+const { isBooleanObject } = require("util/types");
+const { boolean } = require("zod");
 
 require("dotenv").config();
 
@@ -46,13 +49,32 @@ const watchlistSchema = new mongoose.Schema({
         required: true
     },
     watchList : {
-        type : [String],
+        type :[{
+            backdrop_path : {type : String}, 
+            id : {type : String},
+            title: {type : String},
+            name: {type : String},
+            original_title : {type : String}, 
+            overview : {type : String}, 
+            poster_path : {type : String},
+            media_type : {type : String},
+            adult : {type : Boolean}, 
+            original_language : {type : String}, 
+            genre_ids : [{type : Number}],
+            popularity : {type : String},
+            release_date : {type : String}, 
+            video : {type : String}, 
+            vote_average : {type : String}, 
+            vote_count : {type : String}, 
+            
+
+        }],
     }
 })
 
 const User = mongoose.model('User', userSchema);
 const List = mongoose.model("List",watchlistSchema);
 module.exports = {
-	User,
-    List,
+    User,
+    List
 };
