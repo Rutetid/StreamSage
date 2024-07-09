@@ -1,16 +1,17 @@
 import React from 'react'
+import { Link } from 'react-router-dom';
 
 const Signup = () => {
   return (
 			<div>
 				<section className="bg-gray-50 dark:bg-background">
 					<div className="flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0">
-						<a
-							href="/"
+						<Link
+							to="/"
 							className="flex items-center mb-6 text-4xl 3xl:text-5xl font-koulen font-bold text-text"
 						>
 							STREAMSAGE
-						</a>
+						</Link>
 						<div className="w-full bg-white rounded-lg shadow dark:border md:mt-0 sm:max-w-md xl:p-0 dark:bg-bglight dark:border-gray-700">
 							<div className="p-6 space-y-4 md:space-y-6 sm:p-8">
 								<h1 className="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white">

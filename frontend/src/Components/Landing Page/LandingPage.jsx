@@ -3,6 +3,7 @@ import Anime from "../../assets/anime.jpg";
 import Movie from "../../assets/Movie.jpg";
 import Drama from "../../assets/Drama.jpg";
 import WebSeries from "../../assets/got.jpg";
+import { Link } from "react-router-dom";
 
 
 function LandingPage() {
@@ -18,7 +19,7 @@ function LandingPage() {
 						<h1>About</h1>
 					</div>
 					<div className="border-2 rounded-md py-2 px-3 border-primary text-primary font-poppins font-semibold text-md 3xl:text-lg">
-						<a href="/">Sign up</a>
+						<Link to="/signup">Sign up</Link>
 					</div>
 				</div>
 
@@ -43,7 +44,8 @@ function LandingPage() {
 						type="button"
 						className="bg-primary font-poppins font-semibold text-xl 3xl:text-3xl flex justify-center py-2 px-11 rounded-lg mt-10"
 					>
-						Make Your List
+						{" "}
+						<Link to="/homepage">Get Started</Link>
 					</button>
 				</div>
 
