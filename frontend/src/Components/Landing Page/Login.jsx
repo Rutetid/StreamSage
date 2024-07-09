@@ -1,7 +1,27 @@
 import React from 'react'
 import { Link } from 'react-router-dom';
 
+import axios from "axios";
+ 
 const Login = () => {
+
+	const [username, setUsername] = React.useState("");
+	const [password, setPassword] = React.useState("");
+
+	const handleSubmit = async (e) => {
+    e.preventDefault(); 
+
+    try {
+      const response = await axios.post("http://localhost:3000/api/v1/user/signin", {
+        username,
+        password,
+      });
+	  localStorage.setItem("token" , response.data.token)
+    } catch (error) {
+      console.error("There was an error!", error);
+    }
+  };
+
   return (
 			<div>
 				<section className="bg-gray-50 dark:bg-background">
@@ -18,7 +38,7 @@ const Login = () => {
 								<h1 className="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white">
 									Sign in to your account
 								</h1>
-								<form className="space-y-4 md:space-y-6" action="#">
+								<form className="space-y-4 md:space-y-6" action="#" onSubmit={handleSubmit}>
 									<div>
 										<label
 											htmlFor="email"
@@ -33,12 +53,14 @@ const Login = () => {
 											className="bg-gray-50 border border-gray-300 text-gray-900 rounded-lg focus:ring-primary focus:border-primary block w-full p-2.5 dark:bg-text dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
 											placeholder="name@company.com"
 											required=""
+											onChange={(e)=>setUsername(e.target.value)}
 										/>
 									</div>
 									<div>
 										<label
 											htmlFor="password"
 											className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+											
 										>
 											Password
 										</label>
@@ -49,6 +71,7 @@ const Login = () => {
 											placeholder="••••••••"
 											className="bg-gray-50 border border-gray-300 text-gray-900 rounded-lg focus:ring-primary focus:border-primary block w-full p-2.5 dark:bg-text dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
 											required=""
+											onChange={(e)=>setPassword(e.target.value)}
 										/>
 									</div>
 									<div className="flex items-center justify-between">
