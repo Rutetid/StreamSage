@@ -23,7 +23,8 @@ const MyCarousel = () => {
 	fetch("http://localhost:3000/api/v1/watchlist/add" ,{
 		method: 'POST',
 		headers: {
-			'Content-Type': 'application/json'
+			'Content-Type': 'application/json',
+			'token' : localStorage.getItem
 		},
 		body: JSON.stringify({
 			movie: movie
