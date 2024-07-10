@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import Navbar from "./Navbar";
 import SampleCard from "./SampleCard";
 import Anime from "../../assets/anime.jpg";
