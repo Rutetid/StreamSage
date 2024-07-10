@@ -1,12 +1,13 @@
 import React from 'react'
 import { Link } from 'react-router-dom';
-
+import { useNavigate } from 'react-router-dom';
 import axios from "axios";
  
 const Login = () => {
 
 	const [username, setUsername] = React.useState("");
 	const [password, setPassword] = React.useState("");
+	const navigate = useNavigate();
 
 	const handleSubmit = async (e) => {
     e.preventDefault(); 
@@ -17,8 +18,17 @@ const Login = () => {
         password,
       });
 	  localStorage.setItem("token" , response.data.token)
+
+	  if (response.status === 200){
+		navigate("/homepage");
+		alert("Login Successful");
+	  }
+	  else{
+		alert("Login Failed");
+	  }
     } catch (error) {
       console.error("There was an error!", error);
+	   alert("An error occurred during login.");
     }
   };
 

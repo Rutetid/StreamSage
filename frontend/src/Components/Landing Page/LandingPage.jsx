@@ -4,9 +4,19 @@ import Movie from "../../assets/Movie.jpg";
 import Drama from "../../assets/Drama.jpg";
 import WebSeries from "../../assets/got.jpg";
 import { Link } from "react-router-dom";
+import { useState , useEffect } from "react";
 
 
 function LandingPage() {
+
+	const [isSignedUp, setIsSignedUp] = useState(false);
+
+	useEffect(() => {
+		const userToken = localStorage.getItem("token");
+		setIsSignedUp(!!userToken);
+	} , []);
+
+
   return (
 			<div className="bg-background min-h-screen">
 				<div className="flex justify-around items-center pt-4 py-2 px-24 bg-top shadow-xl ">
@@ -18,9 +28,16 @@ function LandingPage() {
 						<h1>Features</h1>
 						<h1>About</h1>
 					</div>
-					<div className="border-2 rounded-md py-2 px-3 border-primary text-primary font-poppins font-semibold text-md 3xl:text-lg">
-						<Link to="/signup">Sign up</Link>
-					</div>
+
+					{isSignedUp ? (
+						<div className="border-2 rounded-md py-2 px-3 border-primary text-primary font-poppins font-semibold text-md 3xl:text-lg">
+							<Link to="/homepage">Home</Link>
+						</div>
+					) : (
+						<div className="border-2 rounded-md py-2 px-3 border-primary text-primary font-poppins font-semibold text-md 3xl:text-lg">
+							<Link to="/signup">Sign up</Link>
+						</div>
+					)}
 				</div>
 
 				<div className="mt-24 ">

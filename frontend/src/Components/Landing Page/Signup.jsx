@@ -2,12 +2,14 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { useState, useEffect } from "react";
 import axios from "axios";	
+import { useNavigate } from "react-router-dom";
 
 const Signup = () => {
 	const [username, setUsername] = React.useState("");
 	const [password, setPassword] = React.useState("");
 	const [firstname, setFirstname] = React.useState("");
 	const [lastname, setLastname] = React.useState("");
+	const navigate = useNavigate();
 
 	const handleSubmit = async (e) => {
     e.preventDefault(); 
@@ -20,6 +22,10 @@ const Signup = () => {
         lastname,
       });
 	  localStorage.setItem("token" , response.data.token)
+	  if (response.status === 200){
+		navigate("/homepage");
+		alert("Signed in Succesfully");
+	  }
     } catch (error) {
       console.error("There was an error!", error);
     }
@@ -27,7 +33,7 @@ const Signup = () => {
 
 	return (
 		<div>
-			<section className="bg-gray-50 dark:bg-background">
+			<section className="bg-gray-50 dark:bg-background min-h-screen">
 				<div className="flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0">
 					<Link
 						to="/"

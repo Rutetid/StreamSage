@@ -1,10 +1,11 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import Navbar from "./Navbar";
 import SampleCard from "./SampleCard";
 import Anime from "../../assets/anime.jpg";
 import Trending from "./MyCarousel";
 
 const HomePage = () => {
+
 	return (
 		<div className="min-h-screen bg-background">
 			<Navbar />
