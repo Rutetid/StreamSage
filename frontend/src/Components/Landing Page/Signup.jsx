@@ -2,12 +2,14 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { useState, useEffect } from "react";
 import axios from "axios";	
+import { useNavigate } from "react-router-dom";
 
 const Signup = () => {
 	const [username, setUsername] = React.useState("");
 	const [password, setPassword] = React.useState("");
 	const [firstname, setFirstname] = React.useState("");
 	const [lastname, setLastname] = React.useState("");
+	const navigate = useNavigate();
 
 	const handleSubmit = async (e) => {
     e.preventDefault(); 
@@ -20,6 +22,10 @@ const Signup = () => {
         lastname,
       });
 	  localStorage.setItem("token" , response.data.token)
+	  if (response.status === 200){
+		navigate("/homepage");
+		alert("Signed in Succesfully");
+	  }
     } catch (error) {
       console.error("There was an error!", error);
     }
@@ -27,7 +33,7 @@ const Signup = () => {
 
 	return (
 		<div>
-			<section className="bg-gray-50 dark:bg-background">
+			<section className="bg-gray-50 dark:bg-background min-h-screen">
 				<div className="flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0">
 					<Link
 						to="/"
@@ -36,12 +42,15 @@ const Signup = () => {
 						STREAMSAGE
 					</Link>
 					<div className="w-full bg-white rounded-lg shadow dark:border md:mt-0 sm:max-w-md xl:p-0 dark:bg-bglight dark:border-gray-700">
-						 
 						<div className="p-6 space-y-4 md:space-y-6 sm:p-8">
 							<h1 className="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white">
 								Create an account
 							</h1>
-							<form className="space-y-4 md:space-y-6" action="#" onSubmit={handleSubmit}>
+							<form
+								className="space-y-4 md:space-y-6"
+								action="#"
+								onSubmit={handleSubmit}
+							>
 								<div>
 									<label
 										htmlFor="email"
@@ -130,7 +139,7 @@ const Signup = () => {
 											I accept the{" "}
 											<a
 												className="font-medium text-primary hover:underline dark:text-primary"
-												href="#"
+												href="https://github.com/Rutetid/StreamSage/blob/main/frontend/T%26C.md"
 											>
 												Terms and Conditions
 											</a>
@@ -139,7 +148,8 @@ const Signup = () => {
 								</div>
 								<button
 									type="submit"
-									className="w-full bg-primary hover:bg-primary focus:	ring-4 focus:outline-none focus:ring-primary font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary dark:hover:bg-primary dark:focus:ring-primary">
+									className="w-full bg-primary hover:bg-primary focus:	ring-4 focus:outline-none focus:ring-primary font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary dark:hover:bg-primary dark:focus:ring-primary"
+								>
 									Create an account
 								</button>
 								<p className="text-sm font-light text-gray-500 dark:text-gray-400">
