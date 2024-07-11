@@ -15,7 +15,7 @@ router.post("/add",authMiddleware , async(req,res) =>{
         })
     };
 
-    const movieData =  req.body;
+    const movieData =  req.body.movie;
 
     const filter =  {userId : req.userId};
     const update = { $push: { watchList: movieData } };
