@@ -40,7 +40,7 @@ router.post("/signup" , async (req,res)=>{
 
     res.json({
         message : "User Created Successfully",
-        token : "Bearer " + token,
+        token :  token,
     });
 
 })
@@ -74,7 +74,7 @@ router.post( "/signin" , async (req,res)=>{
 
     res.json({
         message : "user signed in successfully",
-        token : "Bearer " + token ,
+        token :  token ,
     })
 
 })
