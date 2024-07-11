@@ -15,7 +15,7 @@ router.post("/add",authMiddleware , async(req,res) =>{
         })
     };
 
-    const movieData =  req.body;
+    const movieData =  req.body.movie;
 
     const filter =  {userId : req.userId};
     const update = { $push: { watchList: movieData } };
@@ -35,5 +35,29 @@ router.post("/add",authMiddleware , async(req,res) =>{
     console.log(user.userId);
 
 });
+
+router.get(("/get",authMiddleware , async(req,res) =>{
+
+    const user = await List.findOne({userId : req.userId});
+
+    if(!user){
+        return res.status(406).json({
+            message : "user not found",
+        })
+    };
+    console.log(user);
+    const data =  await user.watchList.find({});
+
+    if(!data){
+        res.status(409).json({
+            message : "couldn't fetch data from backend "
+        })
+    }
+    console.log(data);
+    res.json({
+        data : data,
+    })
+
+}))
 
 module.exports= router;
