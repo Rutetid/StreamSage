@@ -5,6 +5,7 @@ const { JWT_SECRET } = require("./config");
 const authMiddleware =  (req,res,next )=>{
     const authHeader = req.headers.authorization;
     if (!authHeader || !authHeader.startsWith('Bearer ')) {
+        console.log(authHeader);
         return res.status(406).json({});
     }
     // console.log(authHeader);
