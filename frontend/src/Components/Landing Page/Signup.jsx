@@ -21,7 +21,7 @@ const Signup = () => {
         firstname,
         lastname,
       });
-	  localStorage.setItem("token" , response.data.token)
+	  localStorage.setItem("token" , "Bearer " + response.data.token)
 	  if (response.status === 200){
 		navigate("/homepage");
 		alert("Signed in Succesfully");

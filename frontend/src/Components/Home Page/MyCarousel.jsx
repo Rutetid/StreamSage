@@ -24,7 +24,7 @@ const MyCarousel = () => {
 		method: 'POST',
 		headers: {
 			'Content-Type': 'application/json',
-			'token' : localStorage.getItem("token"),
+			'token' : localStorage.getItem,
 		},
 		body: JSON.stringify({
 			movie: movie
