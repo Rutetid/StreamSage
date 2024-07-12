@@ -1,11 +1,13 @@
 import React, { useState } from 'react';
 import movies from '../../assets/Trending.json';
 
+
 const MyCarousel = () => {
   const [index, setIndex] = useState(0);
   const cardsPerView = 6;
   const length = movies.length;
   const token = localStorage.getItem('token'); // Ensure token is retrieved from localStorage
+  const [checked , setChecked] = useState(false);
 
   const handlePrevious = () => {
     const newIndex = index - cardsPerView;
@@ -16,6 +18,8 @@ const MyCarousel = () => {
     const newIndex = index + cardsPerView;
     setIndex(newIndex >= length ? 0 : newIndex);
   };
+
+  
 
   const addToList = (movie) => {
     fetch('http://localhost:3000/api/v1/watchlist/add', {
@@ -57,7 +61,13 @@ const MyCarousel = () => {
                   type="checkbox"
                   className="absolute bottom-0 right-0 m-2 p-2 bg-white rounded-sm"
                   onChange={() => {
-                    addToList(movie);
+                    if(!checked){
+                      addToList(movie);
+                      setChecked(true);
+                    }
+                    else{
+                      setChecked(false);
+                    }
                   }}
                 />
                 <img

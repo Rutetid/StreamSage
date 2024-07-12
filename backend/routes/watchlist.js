@@ -36,6 +36,10 @@ router.post("/add",authMiddleware , async(req,res) =>{
 
 });
 
+router.put("/remove" , authMiddleware , async(req,res)=>{
+    
+} )
+
 router.get("/list", authMiddleware, async (req, res) => {
         const user = await List.findOne({ userId: req.userId });
         
