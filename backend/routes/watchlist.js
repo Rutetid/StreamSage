@@ -36,28 +36,30 @@ router.post("/add",authMiddleware , async(req,res) =>{
 
 });
 
-router.get(("/get",authMiddleware , async(req,res) =>{
+router.get("/list", authMiddleware, async (req, res) => {
+        const user = await List.findOne({ userId: req.userId });
+        console.log(user);
+        if (!user) {
+            return res.status(406).json({
+                message: "user not found",
+            });
+        }
+        console.log(user);
 
-    const user = await List.findOne({userId : req.userId});
+        // Assuming watchList is an array
+        const data = user.watchList;
 
-    if(!user){
-        return res.status(406).json({
-            message : "user not found",
-        })
-    };
-    console.log(user);
-    const data =  await user.watchList.find({});
+        if (!data || data.length === 0) {
+            return res.status(409).json({
+                message: "couldn't fetch data from backend",
+            });
+        }
+        console.log(data);
 
-    if(!data){
-        res.status(409).json({
-            message : "couldn't fetch data from backend "
-        })
-    }
-    console.log(data);
-    res.json({
-        data : data,
-    })
-
-}))
+        res.json({
+            movies: data,
+        });
+    
+});
 
 module.exports= router;
