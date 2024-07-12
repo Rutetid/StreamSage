@@ -1,8 +1,28 @@
+import { useEffect } from 'react'
 import React from 'react'
 import Navbar from '../Home Page/Navbar'
 import Entry from './Entry'
+import axios from "axios";
 
 const Watchlist = () => {
+	useEffect(() => {
+		const token = localStorage.getItem("token");
+		const fetchData = async () => {
+			const response = await axios.get(
+				"http://localhost:3000/api/v1/watchlist/list",
+				{
+					headers: {
+						"Content-Type": "application/json",
+						authorization: `Bearer ${token}`,
+					},
+				},
+			);
+			const movies = response.data;
+			console.log(movies);
+		};
+
+		fetchData();
+	}, []);
   return (
 			<div>
 				<Navbar />

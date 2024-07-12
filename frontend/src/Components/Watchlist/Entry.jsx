@@ -1,19 +1,7 @@
-import React from "react";
 import got from "../../assets/got.jpg";
-import axios from "axios";
+
 
 const Entry = () => {
-	const token = localStorage.getItem("token");
-	const response = async () => {
-		axios.get("http://localhost:3000/api/v1/watchlist/get", {
-			headers: {
-				"Content-Type": "application/json",
-				authorization: `Bearer ${token}`,
-			},
-		});
-		const movies = await response.data;
-		console.log(movies);
-	};
 
 	return (
 		<div>
