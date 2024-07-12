@@ -3,12 +3,18 @@ import Navbar from "./Navbar";
 import SampleCard from "./SampleCard";
 import Anime from "../../assets/anime.jpg";
 import Trending from "./MyCarousel";
+import Popup from "./Popup";
+import { useState } from "react";
 
 const HomePage = () => {
-
+	const [isMenuVisible, setIsMenuVisible] = useState(false);
 	return (
 		<div className="min-h-screen bg-background">
-			<Navbar />
+			<Navbar
+				setIsMenuVisible={setIsMenuVisible}
+				isMenuVisible={isMenuVisible}
+			/>
+			{isMenuVisible && <Popup />}
 			<div>
 				<h1 className="font-poppins font-bold text-6xl text-text flex justify-center pt-20 ">
 					{" "}
