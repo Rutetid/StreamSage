@@ -1,28 +1,32 @@
-import { useEffect } from 'react'
-import React from 'react'
+import React, { useState } from 'react'
 import Navbar from '../Home Page/Navbar'
 import Entry from './Entry'
-import axios from "axios";
+import axios from "axios"
+import { useEffect } from 'react'
 
 const Watchlist = () => {
-	useEffect(() => {
-		const token = localStorage.getItem("token");
-		const fetchData = async () => {
-			const response = await axios.get(
-				"http://localhost:3000/api/v1/watchlist/list",
-				{
-					headers: {
-						"Content-Type": "application/json",
-						authorization: `Bearer ${token}`,
-					},
+	const [mov,setMov] = useState([]);
+	const token = localStorage.getItem("token");
+	const fetchData = async () => {
+		const response = await axios.get(
+			"http://localhost:3000/api/v1/watchlist/list",
+			{
+				headers: {
+					"Content-Type": "application/json",
+					'authorization': `Bearer ${token}`,
 				},
-			);
-			const movies = response.data;
-			console.log(movies);
-		};
-
+			},
+		);
+		const movies = response.data.movies;
+		setMov(movies);
+		
+	};
+	useEffect(()=>{
 		fetchData();
-	}, []);
+		
+	},[])
+	console.log(mov);
+
   return (
 			<div>
 				<Navbar />
@@ -51,7 +55,11 @@ const Watchlist = () => {
 						<div className="w-1/12">Status</div>
 					</div>
 
-					<Entry />
+					{mov.map((movie,index) => (
+						
+						<Entry key={index} movie={movie} >  </Entry>
+					))}
+					
 				</div>
 			</div>
 		);

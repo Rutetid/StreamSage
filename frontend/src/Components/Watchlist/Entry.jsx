@@ -1,7 +1,7 @@
 import got from "../../assets/got.jpg";
 
 
-const Entry = () => {
+const Entry = ({movie}) => {
 
 	return (
 		<div>
@@ -9,12 +9,12 @@ const Entry = () => {
 				<div className="w-1/12 flex justify-center">1</div>
 				<div className="w-1/12">
 					<img
-						src={got}
+						src={movie.backdrop_path}
 						alt=""
 						className=" flex justify-start object-contain h-36"
 					/>
 				</div>
-				<div className="w-6/12 pl-12">Game of Thrones</div>
+				<div className="w-6/12 pl-12">{movie.title || movie.name}</div>
 				<div className="w-2/12 pl-5 ">9.0</div>
 				<div className="w-2/12 pl-5">seen</div>
 			</div>
