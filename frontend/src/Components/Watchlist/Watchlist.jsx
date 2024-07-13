@@ -57,7 +57,7 @@ const Watchlist = () => {
 
 					{mov.map((movie,index) => (
 						
-						<Entry key={index} movie={movie} >  </Entry>
+						<Entry key={index} movie={movie} index={index + 1}>  </Entry>
 					))}
 					
 				</div>

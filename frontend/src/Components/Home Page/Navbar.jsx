@@ -22,8 +22,12 @@ const Navbar = ({IsMenuVisible , setIsMenuVisible}) => {
 				STREAMSAGE{" "}
 			</h1>
 			<div className="flex col-span-3 gap-12 font-poppins font-medium text-xl 3xl:text-2xl  text-primary pt-1">
-				<div>Home</div>
-				<div>Featues</div>
+				<div>
+					<Link to="/homepage">Home</Link>
+				</div>
+				<div>
+					<Link to="/watchlist">Watchlist</Link>
+				</div>
 				<div>About</div>
 			</div>
 			{isSignedUp ? (
