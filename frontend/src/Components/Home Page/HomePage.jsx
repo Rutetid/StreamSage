@@ -6,6 +6,7 @@ import Trending from "./MyCarousel";
 import Popup from "./Popup";
 import { useState } from "react";
 import AnimeCarousel from "./AnimeCarousel";
+import MoviesCarousel from "./MoviesCarousel";
 
 const HomePage = () => {
 	const [isMenuVisible, setIsMenuVisible] = useState(false);
@@ -49,7 +50,7 @@ const HomePage = () => {
 				</div>
 
 				<div className="flex 3xl:px-32 px-6 pt-12 ">
-					<AnimeCarousel />
+					<MoviesCarousel />
 				</div>
 			</div>
 
