@@ -51,7 +51,9 @@ const watchlistSchema = new mongoose.Schema({
     watchList : {
         type :[{
             backdrop_path : {type : String}, 
-            id : {type : String},
+            id : {type : String},          
+            title_english : {type : String},
+            synopsis : {type : String},
             title: {type : String},
             name: {type : String},
             original_title : {type : String}, 
@@ -66,6 +68,7 @@ const watchlistSchema = new mongoose.Schema({
             video : {type : String}, 
             vote_average : {type : String}, 
             vote_count : {type : String}, 
+            images : {jpg :{large_image_url : {type : String}}},
             
 
         }],

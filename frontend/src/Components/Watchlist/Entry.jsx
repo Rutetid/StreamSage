@@ -3,14 +3,17 @@ import { useEffect, useState } from "react";
 
 
 const Entry = ({movie , index}) => {
+
+	console.log( movie.images.jpg.large_image_url);
+
 	return (
 		<div>
 			<div className="h-40 bg-text mx-48 flex items-center font-poppins font-bold text-2xl">
 				<div className="w-1/12 flex justify-center">{index}</div>
 				<div className="w-1/12">
 					<img
-						src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
-						alt=""
+						src={`https://image.tmdb.org/t/p/w500${movie.poster_path }` || `${movie.images.jpg.large_image_url}`}
+						alt={"sad"}
 						className=" flex justify-start object-contain h-36"
 					/>
 				</div>

@@ -16,7 +16,7 @@ const AnimeCarousel = () => {
 		});
 		const resanime = response.data.data;
 		setAnime(resanime);
-        console.log(resanime);
+        console.log("fetched" ,resanime);
 	};
 
 	useEffect(() => {
@@ -34,6 +34,7 @@ const AnimeCarousel = () => {
 	};
 
 	const addToList = (anime) => {
+		console.log( "backend" , anime );
 		fetch("http://localhost:3000/api/v1/watchlist/add", {
 			method: "POST",
 			headers: {
@@ -47,7 +48,7 @@ const AnimeCarousel = () => {
 			.then((res) => res.json())
 			.then((data) => console.log(data))
 			.catch((err) => console.log(err));
-            console.log(anime);
+            
 	};
 
 	return (
@@ -68,8 +69,8 @@ const AnimeCarousel = () => {
 							transform: `translateX(-${(index / cardsPerView) * 100}%)`,
 						}}
 					>
-						{anime.map((anime) => (
-							<div key={anime.id} className="flex-shrink-0 w-1/6 p-1  ">
+						{anime.map((anime,index) => (
+							<div key={index} className="flex-shrink-0 w-1/6 p-1  ">
 								<div className="bg-gray-900 rounded-xl shadow-lg relative">
 									<input
 										type="checkbox"
