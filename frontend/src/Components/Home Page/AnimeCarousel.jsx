@@ -64,13 +64,13 @@ const AnimeCarousel = () => {
 
 				<div className="flex overflow-hidden w-full">
 					<div
-						className="flex transition-transform duration-500 ease-in-out"
+						className="flex transition-transform duration-500 ease-in-out "
 						style={{
 							transform: `translateX(-${(index / cardsPerView) * 100}%)`,
 						}}
 					>
-						{anime.map((anime,index) => (
-							<div key={index} className="flex-shrink-0 w-1/6 p-1  ">
+						{anime.map((anime, index) => (
+							<div key={index} className="flex-shrink-0 w-1/6 p-1">
 								<div className="bg-gray-900 rounded-xl shadow-lg relative">
 									<input
 										type="checkbox"
@@ -91,8 +91,8 @@ const AnimeCarousel = () => {
 									/>
 								</div>
 								<div className="pt-6">
-									<div className="text-text text-sm font-poppins  block overflow-hidden">
-										{anime.title_english}
+									<div className="text-text text-sm font-poppins block overflow-hidden ">
+										{/* {anime.title_english} */} {anime.normalizedTitle}
 									</div>
 								</div>
 							</div>

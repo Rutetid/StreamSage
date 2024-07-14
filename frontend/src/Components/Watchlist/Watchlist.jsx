@@ -1,11 +1,11 @@
-import React, { useState } from 'react'
-import Navbar from '../Home Page/Navbar'
-import Entry from './Entry'
-import axios from "axios"
-import { useEffect } from 'react'
+import React, { useState } from "react";
+import Navbar from "../Home Page/Navbar";
+import Entry from "./Entry";
+import axios from "axios";
+import { useEffect } from "react";
 
 const Watchlist = () => {
-	const [mov,setMov] = useState([]);
+	const [mov, setMov] = useState([]);
 	const token = localStorage.getItem("token");
 	const fetchData = async () => {
 		const response = await axios.get(
@@ -13,30 +13,57 @@ const Watchlist = () => {
 			{
 				headers: {
 					"Content-Type": "application/json",
-					'authorization': `Bearer ${token}`,
+					authorization: `Bearer ${token}`,
 				},
 			},
 		);
 		const movies = response.data.movies;
-		setMov(movies);
-		
+		const normalizedMovies = movies.map((movie) => {
+			// Normalize title
+			const title = movie.title || movie.title_english || movie.name;
+
+			// Normalize image URL
+			// Assuming the properties could be 'image_url', 'poster', or similar
+			let imageUrl;
+			if (movie.poster_path) {
+				imageUrl = `https://image.tmdb.org/t/p/w500${movie.poster_path}`;
+			} else if (
+				movie.images?.jpg?.large_image_url
+			) {
+				imageUrl = movie.images.jpg.large_image_url;
+			}
+			
+
+			// Normalize rating
+			// Assuming the properties could be 'rating', 'score', or similar
+			const rating = movie.rating || movie.score;
+
+			// Return a new object with a consistent structure
+			return {
+				...movie, // Spread the original movie object to keep other properties
+				normalizedTitle: title, // Add the normalized title
+				normalizedImageUrl: imageUrl, // Add the normalized image URL
+				normalizedRating: rating, // Add the normalized rating
+			};
+		});
+
+		setMov(normalizedMovies);
 	};
-	useEffect(()=>{
+	useEffect(() => {
 		fetchData();
-		
-	},[])
+	}, []);
 	console.log(mov);
 
-  return (
-			<div>
-				<Navbar />
-				<div className="bg-background min-h-screen">
-					<h1 className="font-poppins font-bold text-6xl text-text flex justify-center pt-12 ">
-						{" "}
-						Watchlist{" "}
-					</h1>
-					{/* Topbar (plan to watch , completed) */}
-					{/* <div className="flex col-3  bg-primary justify-around mx-96 font-poppins font-bold text-2xl mt-20  ">
+	return (
+		<div>
+			<Navbar />
+			<div className="bg-background min-h-screen">
+				<h1 className="font-poppins font-bold text-6xl text-text flex justify-center pt-12 ">
+					{" "}
+					Watchlist{" "}
+				</h1>
+				{/* Topbar (plan to watch , completed) */}
+				{/* <div className="flex col-3  bg-primary justify-around mx-96 font-poppins font-bold text-2xl mt-20  ">
 						<div className="flex justify-center w-52">
 							<h1>All Entries</h1>
 						</div>
@@ -48,21 +75,21 @@ const Watchlist = () => {
 						</div>
 					</div> */}
 
-					<div className="h-16 bg-primary mx-48 mt-16 flex items-center font-poppins font-bold text-2xl">
-						<div className="w-1/12 flex justify-center">#</div>
-						<div className="w-7/12 ">Title</div>
-						<div className="w-2/12 flex justify-start">Rating</div>
-						<div className="w-1/12">Status</div>
-					</div>
-
-					{mov.map((movie,index) => (
-						
-						<Entry key={index} movie={movie} index={index + 1}>  </Entry>
-					))}
-					
+				<div className="h-16 bg-primary mx-48 mt-16 flex items-center font-poppins font-bold text-2xl">
+					<div className="w-1/12 flex justify-center">#</div>
+					<div className="w-7/12 ">Title</div>
+					<div className="w-2/12 flex justify-start">Rating</div>
+					<div className="w-1/12">Status</div>
 				</div>
+
+				{mov.map((movie, index) => (
+					<Entry key={index} movie={movie} index={index + 1}>
+						{" "}
+					</Entry>
+				))}
 			</div>
-		);
-}
+		</div>
+	);
+};
 
 export default Watchlist;
