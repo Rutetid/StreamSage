@@ -5,6 +5,7 @@ import Anime from "../../assets/anime.jpg";
 import Trending from "./MyCarousel";
 import Popup from "./Popup";
 import { useState } from "react";
+import AnimeCarousel from "./AnimeCarousel"
 
 const HomePage = () => {
 	const [isMenuVisible, setIsMenuVisible] = useState(false);
@@ -15,6 +16,7 @@ const HomePage = () => {
 				isMenuVisible={isMenuVisible}
 			/>
 			{isMenuVisible && <Popup />}
+			
 			<div>
 				<h1 className="font-poppins font-bold text-6xl text-text flex justify-center pt-20 ">
 					{" "}
@@ -25,7 +27,7 @@ const HomePage = () => {
 					<Trending />
 				</div>
 			</div>
-
+			{/* 
 			<div className="pt-32">
 				<span className="font-poppins font-bold text-3xl text-text ml-40">
 					{" "}
@@ -35,19 +37,16 @@ const HomePage = () => {
 				<div className="flex 3xl:px-32 px-40 pt-12 ">
 					<Trending />
 				</div>
-			</div>
+			</div> */}
 
 			<div className="pt-32">
-				<span className="font-poppins font-bold text-3xl text-text ml-40">
+				<h1 className="font-poppins font-bold text-3xl text-text ml-40">
 					{" "}
 					Top Movies
-				</span>
+				</h1>
 
-				<div className="flex col-span-4 gap-12 3xl:px-32 px-40 pt-12 justify-around items-center">
-					<SampleCard img={Anime} genre={"Anime"} />
-					<SampleCard img={Anime} genre={"Anime"} />
-					<SampleCard img={Anime} genre={"Anime"} />
-					<SampleCard img={Anime} genre={"Anime"} />
+				<div className="flex 3xl:px-32 px-6 pt-20">
+					<AnimeCarousel />
 				</div>
 			</div>
 

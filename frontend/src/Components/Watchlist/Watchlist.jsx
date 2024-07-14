@@ -35,8 +35,8 @@ const Watchlist = () => {
 						{" "}
 						Watchlist{" "}
 					</h1>
-
-					<div className="flex col-3  bg-primary justify-around mx-96 font-poppins font-bold text-2xl mt-20  ">
+					{/* Topbar (plan to watch , completed) */}
+					{/* <div className="flex col-3  bg-primary justify-around mx-96 font-poppins font-bold text-2xl mt-20  ">
 						<div className="flex justify-center w-52">
 							<h1>All Entries</h1>
 						</div>
@@ -46,7 +46,7 @@ const Watchlist = () => {
 						<div className="flex justify-center w-52">
 							<h1>Completed</h1>
 						</div>
-					</div>
+					</div> */}
 
 					<div className="h-16 bg-primary mx-48 mt-16 flex items-center font-poppins font-bold text-2xl">
 						<div className="w-1/12 flex justify-center">#</div>

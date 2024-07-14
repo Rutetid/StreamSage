@@ -14,7 +14,7 @@ const Entry = ({movie , index}) => {
 						className=" flex justify-start object-contain h-36"
 					/>
 				</div>
-				<div className="w-6/12 pl-12">{movie.title || movie.name}</div>
+				<div className="w-6/12 pl-12">{movie.title_english || movie.title || movie.name}</div>
 				<div className="w-2/12 pl-5 ">{movie.vote_average}</div>
 				<div className="w-2/12 pl-5">seen</div>
 			</div>

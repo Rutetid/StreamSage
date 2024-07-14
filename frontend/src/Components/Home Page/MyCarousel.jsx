@@ -7,7 +7,7 @@ const MyCarousel = () => {
   const cardsPerView = 6;
   const length = movies.length;
   const token = localStorage.getItem('token'); // Ensure token is retrieved from localStorage
-  const [checked , setChecked] = useState(false);
+  const [checked , setChecked] = useState(false);   
 
   const handlePrevious = () => {
     const newIndex = index - cardsPerView;
@@ -51,7 +51,7 @@ const MyCarousel = () => {
   // }
 
   return (
-    <div className="Trending flex items-center justify-center w-full relative bg-background">
+    <div className="flex items-center justify-center w-full relative bg-background">
       <button
         className="absolute left-0 p-2 border border-text bg-black bg-opacity-35 text-text font-poppins text-5xl rounded-lg hover:text-primary hover:border-primary focus:outline-none z-10"
         onClick={handlePrevious}
