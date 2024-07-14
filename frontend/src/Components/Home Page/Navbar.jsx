@@ -19,7 +19,7 @@ const Navbar = ({IsMenuVisible , setIsMenuVisible}) => {
 	return (
 		<div className="flex justify-between pt-4 py-2 bg-top shadow-xl px-10 ">
 			<h1 className="text-4xl 3xl:text-5xl font-koulen font-bold text-text ">
-				STREAMSAGE{" "}
+				<Link to="/homepage"> STREAMSAGE{" "} </Link>
 			</h1>
 			<div className="flex col-span-3 gap-12 font-poppins font-medium text-xl 3xl:text-2xl  text-primary pt-1">
 				<div>

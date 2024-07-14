@@ -3,8 +3,10 @@ import Navbar from "../Home Page/Navbar";
 import Entry from "./Entry";
 import axios from "axios";
 import { useEffect } from "react";
+import Popup from "../Home Page/Popup";
 
 const Watchlist = () => {
+	const [isMenuVisible, setIsMenuVisible] = useState(false);
 	const [mov, setMov] = useState([]);
 	const token = localStorage.getItem("token");
 	const fetchData = async () => {
@@ -27,12 +29,9 @@ const Watchlist = () => {
 			let imageUrl;
 			if (movie.poster_path) {
 				imageUrl = `https://image.tmdb.org/t/p/w500${movie.poster_path}`;
-			} else if (
-				movie.images?.jpg?.large_image_url
-			) {
+			} else if (movie.images?.jpg?.large_image_url) {
 				imageUrl = movie.images.jpg.large_image_url;
 			}
-			
 
 			// Normalize rating
 			// Assuming the properties could be 'rating', 'score', or similar
@@ -56,8 +55,12 @@ const Watchlist = () => {
 
 	return (
 		<div>
-			<Navbar />
-			<div className="bg-background min-h-screen">
+			<Navbar
+				setIsMenuVisible={setIsMenuVisible}
+				isMenuVisible={isMenuVisible}
+			/>
+			{isMenuVisible && <Popup />}
+			<div className="bg-background min-h-screen pb-20">
 				<h1 className="font-poppins font-bold text-6xl text-text flex justify-center pt-12 ">
 					{" "}
 					Watchlist{" "}
@@ -80,6 +83,7 @@ const Watchlist = () => {
 					<div className="w-7/12 ">Title</div>
 					<div className="w-2/12 flex justify-start">Rating</div>
 					<div className="w-1/12">Status</div>
+					<div className="w-40 bg-accent "> </div>
 				</div>
 
 				{mov.map((movie, index) => (
