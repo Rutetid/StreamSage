@@ -92,7 +92,7 @@ const AnimeCarousel = () => {
 								</div>
 								<div className="pt-6">
 									<div className="text-text text-sm font-poppins block overflow-hidden ">
-										{/* {anime.title_english} */} {anime.normalizedTitle}
+										{anime.title_english} 
 									</div>
 								</div>
 							</div>

@@ -22,7 +22,7 @@ const Watchlist = () => {
 		const movies = response.data.movies;
 		const normalizedMovies = movies.map((movie) => {
 			// Normalize title
-			const title = movie.title || movie.title_english || movie.name;
+			const title = movie.title_english || movie.title || movie.name;
 
 			// Normalize image URL
 			// Assuming the properties could be 'image_url', 'poster', or similar
