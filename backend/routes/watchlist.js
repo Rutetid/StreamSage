@@ -44,15 +44,17 @@ router.put("/remove" , authMiddleware , async(req,res)=>{
             message: "user not found",
         });
     }
-    const movieId =  req.body.Id;
+    const movieId =  req.body.id || req.body.mal_id;
     const filter =  {userId : req.userId};
     const update = { $pull: { watchList : {id : movieId}} };
+    const update2 = {$pull :{ watchList : {mal_id : movieId}}};
 
     // console.log(update);
     // console.log(filter);
     // console.log(movieId);
-
-    const result = await List.updateOne(filter,update);
+    console.log(update2);
+    const result = await List.updateOne(filter,update) ;
+    const result2 = await List.updateOne(filter,update2) ;
 
     if (result.modifiedCount > 0) {
         res.json({
@@ -60,10 +62,16 @@ router.put("/remove" , authMiddleware , async(req,res)=>{
         });
     } 
     else {
-        res.status(400).json({
+        if(result2.modifiedCount > 0){
+            res.json({
+                message: "removed Successfully " + movieId,
+            });
+        }
+        else
+       { res.status(400).json({
             message: "remove failed",
         });
-    }
+    }}
 })
 
 router.get("/list", authMiddleware, async (req, res) => {
