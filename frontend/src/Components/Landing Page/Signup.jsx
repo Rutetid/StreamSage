@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { useState, useEffect } from "react";
-import axios from "axios";	
+import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
 const Signup = () => {
@@ -12,24 +12,27 @@ const Signup = () => {
 	const navigate = useNavigate();
 
 	const handleSubmit = async (e) => {
-    e.preventDefault(); 
+		e.preventDefault();
 
-    try {
-      const response = await axios.post("http://localhost:3000/api/v1/user/signup", {
-        username,
-        password,
-        firstname,
-        lastname,
-      });
-	  localStorage.setItem("token" ,response.data.token)
-	  if (response.status === 200){
-		navigate("/homepage");
-		alert("Signed in Succesfully");
-	  }
-    } catch (error) {
-      console.error("There was an error!", error);
-    }
-  };
+		try {
+			const response = await axios.post(
+				"https://streamsage.vercel.app/api/v1/user/signup",
+				{
+					username,
+					password,
+					firstname,
+					lastname,
+				},
+			);
+			localStorage.setItem("token", response.data.token);
+			if (response.status === 200) {
+				navigate("/homepage");
+				alert("Signed in Succesfully");
+			}
+		} catch (error) {
+			console.error("There was an error!", error);
+		}
+	};
 
 	return (
 		<div>

@@ -6,14 +6,12 @@ import { useEffect } from "react";
 import Popup from "../Home Page/Popup";
 
 const Watchlist = () => {
-
-
 	const [isMenuVisible, setIsMenuVisible] = useState(false);
 	const [mov, setMov] = useState([]);
 	const token = localStorage.getItem("token");
 	const fetchData = async () => {
 		const response = await axios.get(
-			"http://localhost:3000/api/v1/watchlist/list",
+			"https://streamsage.vercel.app/api/v1/watchlist/list",
 			{
 				headers: {
 					"Content-Type": "application/json",
@@ -25,7 +23,7 @@ const Watchlist = () => {
 		const normalizedMovies = movies.map((movie) => {
 			// Normalize title
 			const title = movie.title_english || movie.title || movie.name;
-			const id = movie.id ||  movie.mal_id;
+			const id = movie.id || movie.mal_id;
 			// Normalize image URL
 			// Assuming the properties could be 'image_url', 'poster', or similar
 			let imageUrl;
@@ -47,7 +45,6 @@ const Watchlist = () => {
 				normalizedTitle: title, // Add the normalized title
 				normalizedImageUrl: imageUrl, // Add the normalized image URL
 				normalizedRating: rating, // Add the normalized rating
-
 			};
 		});
 

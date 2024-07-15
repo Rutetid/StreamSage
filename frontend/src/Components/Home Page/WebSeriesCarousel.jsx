@@ -19,7 +19,7 @@ const WebSeriesCarousel = () => {
 	};
 
 	const addToList = (movie) => {
-		fetch("http://localhost:3000/api/v1/watchlist/add", {
+		fetch("https://streamsage.vercel.app/api/v1/watchlist/add", {
 			method: "POST",
 			headers: {
 				"Content-Type": "application/json",
@@ -32,7 +32,7 @@ const WebSeriesCarousel = () => {
 			.then((res) => res.json())
 			.then((data) => console.log(data))
 			.catch((err) => console.log(err));
-			alert("Added to Watchlist");
+		alert("Added to Watchlist");
 	};
 
 	return (
