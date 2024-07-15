@@ -23,8 +23,6 @@
       "dest": "frontend/dist/$1"
     }
   ],
-	"cleanUrls" : true,
-	"trailingSlash": false
 }
 
 	
