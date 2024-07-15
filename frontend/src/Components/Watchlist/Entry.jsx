@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 
 const Entry = ({ movie, index }) => {
-  const id = movie.mal_id || movie.id;
+  const id = movie.mal_id || movie.id || movie.mdl_id;
 //   console.log(movie.mal_id);
 
   const removeFromList = async (id) => {

@@ -52,7 +52,8 @@ const watchlistSchema = new mongoose.Schema({
         type :[{
             backdrop_path : {type : String}, 
             id : {type : String},          
-            mal_id : {type : String},          
+            mal_id : {type : String},  
+            mdl_id : {type : String},        
             title_english : {type : String},
             synopsis : {type : String},
             title: {type : String},
@@ -70,7 +71,8 @@ const watchlistSchema = new mongoose.Schema({
             vote_average : {type : String}, 
             vote_count : {type : String}, 
             images : {jpg :{large_image_url : {type : String}}},
-            
+            poster_url : {type : String},
+            description : {type : String},
 
         }],
     }

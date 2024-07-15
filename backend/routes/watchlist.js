@@ -48,13 +48,12 @@ router.put("/remove" , authMiddleware , async(req,res)=>{
     const filter =  {userId : req.userId};
     const update = { $pull: { watchList : {id : movieId}} };
     const update2 = {$pull :{ watchList : {mal_id : movieId}}};
+    const update3 = {$pull :{ watchList : {mdl_id : movieId}}};
 
-    // console.log(update);
-    // console.log(filter);
-    // console.log(movieId);
-    console.log(update2);
+    // console.log(update2);
     const result = await List.updateOne(filter,update) ;
     const result2 = await List.updateOne(filter,update2) ;
+    const result3 = await List.updateOne(filter,update3) ;
 
     if (result.modifiedCount > 0) {
         res.json({
@@ -62,7 +61,7 @@ router.put("/remove" , authMiddleware , async(req,res)=>{
         });
     } 
     else {
-        if(result2.modifiedCount > 0){
+        if(result2.modifiedCount > 0 || result3.modifiedCount > 0) {
             res.json({
                 message: "removed Successfully " + movieId,
             });

@@ -45,7 +45,6 @@ const Watchlist = () => {
 			return {
 				...movie, // Spread the original movie object to keep other properties
 				normalizedTitle: title, // Add the normalized title
-				normalizedId : id ,
 				normalizedImageUrl: imageUrl, // Add the normalized image URL
 				normalizedRating: rating, // Add the normalized rating
 
