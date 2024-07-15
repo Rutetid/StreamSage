@@ -34,18 +34,7 @@ const MoviesCarousel = () => {
 			.catch((err) => console.log(err));
 	};
 
-	// const removeFromList = async (Id) => {
-	//     const response = await axios.put("http://localhost:3000/api/v1/watchlist/remove" ,{
-	//       headers: {
-	//       'Content-Type': 'application/json',
-	//       'authorization': `Bearer ${token}`,
-	//     },
-	//       body : {
-	//         'Id' : Id,
-	//       }
-	//     } );
-	//     console.log(response.data);
-	// }
+	
 
 	return (
 		<div className="flex items-center justify-center w-full relative bg-background">

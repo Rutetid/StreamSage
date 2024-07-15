@@ -52,6 +52,7 @@ const watchlistSchema = new mongoose.Schema({
         type :[{
             backdrop_path : {type : String}, 
             id : {type : String},          
+            mal_id : {type : String},          
             title_english : {type : String},
             synopsis : {type : String},
             title: {type : String},

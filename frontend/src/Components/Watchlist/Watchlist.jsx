@@ -6,6 +6,8 @@ import { useEffect } from "react";
 import Popup from "../Home Page/Popup";
 
 const Watchlist = () => {
+
+
 	const [isMenuVisible, setIsMenuVisible] = useState(false);
 	const [mov, setMov] = useState([]);
 	const token = localStorage.getItem("token");
@@ -23,7 +25,7 @@ const Watchlist = () => {
 		const normalizedMovies = movies.map((movie) => {
 			// Normalize title
 			const title = movie.title_english || movie.title || movie.name;
-
+			const id = movie.id ||  movie.mal_id;
 			// Normalize image URL
 			// Assuming the properties could be 'image_url', 'poster', or similar
 			let imageUrl;
@@ -41,8 +43,10 @@ const Watchlist = () => {
 			return {
 				...movie, // Spread the original movie object to keep other properties
 				normalizedTitle: title, // Add the normalized title
+				normalizedId : id ,
 				normalizedImageUrl: imageUrl, // Add the normalized image URL
 				normalizedRating: rating, // Add the normalized rating
+
 			};
 		});
 
