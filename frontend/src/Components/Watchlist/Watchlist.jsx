@@ -29,7 +29,9 @@ const Watchlist = () => {
 			// Normalize image URL
 			// Assuming the properties could be 'image_url', 'poster', or similar
 			let imageUrl;
-			if (movie.poster_path) {
+			if (movie.poster_url) {
+				imageUrl = movie.poster_url;
+			} else if (movie.poster_path) {
 				imageUrl = `https://image.tmdb.org/t/p/w500${movie.poster_path}`;
 			} else if (movie.images?.jpg?.large_image_url) {
 				imageUrl = movie.images.jpg.large_image_url;
