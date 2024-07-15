@@ -19,7 +19,7 @@ const DramaCarousel = () => {
 	};
 
 	const addToList = (movie) => {
-		fetch("https://streamsage.vercel.app/api/v1/watchlist/add", {
+		fetch("/api/v1/watchlist/add", {
 			method: "POST",
 			headers: {
 				"Content-Type": "application/json",
@@ -37,7 +37,7 @@ const DramaCarousel = () => {
 	};
 
 	// const removeFromList = async (Id) => {
-	//     const response = await axios.put("https://streamsage.vercel.app/api/v1/watchlist/remove" ,{
+	//     const response = await axios.put("/api/v1/watchlist/remove" ,{
 	//       headers: {
 	//       'Content-Type': 'application/json',
 	//       'authorization': `Bearer ${token}`,

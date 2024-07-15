@@ -12,13 +12,10 @@ const Login = () => {
 		e.preventDefault();
 
 		try {
-			const response = await axios.post(
-				"https://streamsage.vercel.app/api/v1/user/signin",
-				{
-					username,
-					password,
-				},
-			);
+			const response = await axios.post("/api/v1/user/signin", {
+				username,
+				password,
+			});
 			localStorage.setItem("token", response.data.token);
 
 			if (response.status === 200) {
