@@ -7,6 +7,7 @@ import Popup from "./Popup";
 import { useState } from "react";
 import AnimeCarousel from "./AnimeCarousel";
 import MoviesCarousel from "./MoviesCarousel";
+import DramaCarousel from "./DramaCarousel";
 
 const HomePage = () => {
 	const [isMenuVisible, setIsMenuVisible] = useState(false);
@@ -74,11 +75,8 @@ const HomePage = () => {
 					Top in Drama
 				</span>
 
-				<div className="flex col-span-4 gap-12 3xl:px-32 px-40 pt-12 justify-around items-center">
-					<SampleCard img={Anime} genre={"Anime"} />
-					<SampleCard img={Anime} genre={"Anime"} />
-					<SampleCard img={Anime} genre={"Anime"} />
-					<SampleCard img={Anime} genre={"Anime"} />
+				<div className="flex 3xl:px-32 px-6 pt-12 ">
+					<DramaCarousel />
 				</div>
 			</div>
 
