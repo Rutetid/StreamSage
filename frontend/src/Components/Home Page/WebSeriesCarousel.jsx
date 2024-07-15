@@ -32,6 +32,7 @@ const WebSeriesCarousel = () => {
 			.then((res) => res.json())
 			.then((data) => console.log(data))
 			.catch((err) => console.log(err));
+			alert("Added to Watchlist");
 	};
 
 	return (
@@ -54,18 +55,16 @@ const WebSeriesCarousel = () => {
 					{movies.map((movie) => (
 						<div key={movie.id} className="flex-shrink-0 w-1/6 p-1">
 							<div className="bg-gray-900 rounded-xl shadow-lg relative">
-								<input
-									type="checkbox"
-									className="absolute bottom-0 right-0 m-2 p-2 bg-white rounded-sm"
-									onChange={() => {
-										if (!checked) {
-											addToList(movie);
-											setChecked(true);
-										} else {
-											setChecked(false);
-										}
+								<button
+									type="button"
+									className="absolute bottom-0 right-0 m-2 px-2 shadow-text shadow-sm bg-background rounded-lg font-poppins font-semibold text-text "
+									onClick={() => {
+										addToList(movie);
 									}}
-								/>
+								>
+									{" "}
+									Add
+								</button>
 								<img
 									src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
 									alt={movie.title}

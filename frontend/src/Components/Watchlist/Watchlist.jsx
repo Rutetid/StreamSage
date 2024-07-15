@@ -85,10 +85,10 @@ const Watchlist = () => {
 
 				<div className="h-16 bg-primary mx-48 mt-16 flex items-center font-poppins font-bold text-2xl">
 					<div className="w-1/12 flex justify-center">#</div>
-					<div className="w-7/12 ">Title</div>
-					<div className="w-2/12 flex justify-start">Rating</div>
-					<div className="w-1/12">Status</div>
-					<div className="w-40 bg-accent "> </div>
+					<div className="w-7/12 pl-10 ">Title</div>
+					<div className="w-2/12 flex justify-start"> </div>
+					<div className="w-4/12">Status (coming soon)</div>
+					<div className="w-20 bg-accent "> </div>
 				</div>
 
 				{mov.map((movie, index) => (
