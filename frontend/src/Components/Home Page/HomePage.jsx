@@ -8,6 +8,7 @@ import { useState } from "react";
 import AnimeCarousel from "./AnimeCarousel";
 import MoviesCarousel from "./MoviesCarousel";
 import DramaCarousel from "./DramaCarousel";
+import WebSeriesCarousel from "./WebSeriesCarousel";
 
 const HomePage = () => {
 	const [isMenuVisible, setIsMenuVisible] = useState(false);
@@ -70,27 +71,28 @@ const HomePage = () => {
 			</div>
 
 			<div className="pt-32">
-				<span className="font-poppins font-bold text-3xl text-text ml-40">
-					{" "}
-					Top in Drama
-				</span>
-
+				<div className="flex">
+					<div className="bg-primary w-2 text-primary ml-10"> </div>
+					<h1 className="font-poppins font-bold text-3xl text-text ml-5">
+						{" "}
+						Top in Drama
+					</h1>
+				</div>
 				<div className="flex 3xl:px-32 px-6 pt-12 ">
 					<DramaCarousel />
 				</div>
 			</div>
 
 			<div className="py-32">
-				<span className="font-poppins font-bold text-3xl text-text ml-40">
-					{" "}
-					Top Web Series
-				</span>
-
-				<div className="flex col-span-4 gap-12 3xl:px-32 px-40 pt-12 justify-around items-center">
-					<SampleCard img={Anime} genre={"Anime"} />
-					<SampleCard img={Anime} genre={"Anime"} />
-					<SampleCard img={Anime} genre={"Anime"} />
-					<SampleCard img={Anime} genre={"Anime"} />
+				<div className="flex">
+					<div className="bg-primary w-2 text-primary ml-10"> </div>
+					<h1 className="font-poppins font-bold text-3xl text-text ml-5">
+						{" "}
+						Top Web Series
+					</h1>
+				</div>
+				<div className="flex 3xl:px-32 px-6 pt-12 ">
+					<WebSeriesCarousel/>
 				</div>
 			</div>
 		</div>
