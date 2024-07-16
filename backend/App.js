@@ -5,7 +5,7 @@ const cors = require("cors");
 const mainRouter = require("./routes/index")
 
 app.use(express.json());
-app.use();
+app.use(cors());
 	// cors({
 	// 	origin: "https://streamsage.vercel.app",
 	// 	methods: ["GET", "POST", "PUT", "DELETE"],
