@@ -18,7 +18,7 @@ const MyCarousel = () => {
 	};
 
 	const addToList = (movie) => {
-		fetch("/api/v1/watchlist/add", {
+		fetch("https://stream-sage-backend.vercel.app/api/v1/watchlist/add", {
 			method: "POST",
 			headers: {
 				"Content-Type": "application/json",

@@ -15,12 +15,15 @@ const Signup = () => {
 		e.preventDefault();
 
 		try {
-			const response = await axios.post("/api/v1/user/signup", {
-				username,
-				password,
-				firstname,
-				lastname,
-			});
+			const response = await axios.post(
+				"https://stream-sage-backend.vercel.app/api/v1/user/signup",
+				{
+					username,
+					password,
+					firstname,
+					lastname,
+				},
+			);
 			localStorage.setItem("token", response.data.token);
 			if (response.status === 200) {
 				navigate("/homepage");

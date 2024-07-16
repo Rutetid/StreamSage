@@ -35,7 +35,7 @@ const AnimeCarousel = () => {
 
 	const addToList = (anime) => {
 		console.log("backend", anime);
-		fetch("/api/v1/watchlist/add", {
+		fetch("https://stream-sage-backend.vercel.app/api/v1/watchlist/add", {
 			method: "POST",
 			headers: {
 				"Content-Type": "application/json",

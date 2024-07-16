@@ -10,12 +10,15 @@ const Watchlist = () => {
 	const [mov, setMov] = useState([]);
 	const token = localStorage.getItem("token");
 	const fetchData = async () => {
-		const response = await axios.get("/api/v1/watchlist/list", {
-			headers: {
-				"Content-Type": "application/json",
-				authorization: `Bearer ${token}`,
+		const response = await axios.get(
+			"https://stream-sage-backend.vercel.app/api/v1/watchlist/list",
+			{
+				headers: {
+					"Content-Type": "application/json",
+					authorization: `Bearer ${token}`,
+				},
 			},
-		});
+		);
 		const movies = response.data.movies;
 		const normalizedMovies = movies.map((movie) => {
 			// Normalize title

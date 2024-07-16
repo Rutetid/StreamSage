@@ -10,7 +10,7 @@ const Entry = ({ movie, index }) => {
 		try {
 			const token = localStorage.getItem("token");
 			const response = await axios.put(
-				"/api/v1/watchlist/remove",
+				"https://stream-sage-backend.vercel.app/api/v1/watchlist/remove",
 				{ id: id },
 				{
 					headers: {
