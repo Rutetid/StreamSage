@@ -16,7 +16,7 @@ const Signup = () => {
 
 		try {
 			const response = await axios.post(
-				"https://stream-sage-backend.vercel.app/api/v1/user/signup",
+				"https://streamsage-1.onrender.com/api/v1/user/signup",
 				{
 					username,
 					password,

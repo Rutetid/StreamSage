@@ -6,12 +6,14 @@ import { useEffect } from "react";
 import Popup from "../Home Page/Popup";
 
 const Watchlist = () => {
+
+
 	const [isMenuVisible, setIsMenuVisible] = useState(false);
 	const [mov, setMov] = useState([]);
 	const token = localStorage.getItem("token");
 	const fetchData = async () => {
 		const response = await axios.get(
-			"https://stream-sage-backend.vercel.app/api/v1/watchlist/list",
+			"https://streamsage-1.onrender.com/api/v1/watchlist/list",
 			{
 				headers: {
 					"Content-Type": "application/json",
@@ -23,7 +25,7 @@ const Watchlist = () => {
 		const normalizedMovies = movies.map((movie) => {
 			// Normalize title
 			const title = movie.title_english || movie.title || movie.name;
-			const id = movie.id || movie.mal_id;
+			const id = movie.id ||  movie.mal_id;
 			// Normalize image URL
 			// Assuming the properties could be 'image_url', 'poster', or similar
 			let imageUrl;
@@ -45,6 +47,7 @@ const Watchlist = () => {
 				normalizedTitle: title, // Add the normalized title
 				normalizedImageUrl: imageUrl, // Add the normalized image URL
 				normalizedRating: rating, // Add the normalized rating
+
 			};
 		});
 
@@ -82,10 +85,10 @@ const Watchlist = () => {
 
 				<div className="h-16 bg-primary mx-48 mt-16 flex items-center font-poppins font-bold text-2xl">
 					<div className="w-1/12 flex justify-center">#</div>
-					<div className="w-7/12 pl-10 ">Title</div>
-					<div className="w-2/12 flex justify-start"> </div>
-					<div className="w-4/12">Status (coming soon)</div>
-					<div className="w-20 bg-accent "> </div>
+					<div className="w-7/12 ">Title</div>
+					<div className="w-2/12 flex justify-start">Rating</div>
+					<div className="w-1/12">Status</div>
+					<div className="w-40 bg-accent "> </div>
 				</div>
 
 				{mov.map((movie, index) => (
