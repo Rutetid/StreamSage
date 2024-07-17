@@ -19,7 +19,7 @@ const DramaCarousel = () => {
 	};
 
 	const addToList = (movie) => {
-		fetch("http://localhost:3000/api/v1/watchlist/add", {
+		fetch("https://stream-sage-backend.vercel.app/api/v1/watchlist/add", {
 			method: "POST",
 			headers: {
 				"Content-Type": "application/json",
@@ -32,12 +32,12 @@ const DramaCarousel = () => {
 			.then((res) => res.json())
 			.then((data) => console.log(data))
 			.catch((err) => console.log(err));
-            console.log(movie);
-            
+		console.log(movie);
+		alert("Added to Watchlist");
 	};
 
 	// const removeFromList = async (Id) => {
-	//     const response = await axios.put("http://localhost:3000/api/v1/watchlist/remove" ,{
+	//     const response = await axios.put("/api/v1/watchlist/remove" ,{
 	//       headers: {
 	//       'Content-Type': 'application/json',
 	//       'authorization': `Bearer ${token}`,
@@ -66,21 +66,19 @@ const DramaCarousel = () => {
 						transform: `translateX(-${(index / cardsPerView) * 100}%)`,
 					}}
 				>
-					{movies.map((movie , index) => (
+					{movies.map((movie, index) => (
 						<div key={index} className="flex-shrink-0 w-1/6 p-1">
 							<div className="bg-gray-900 rounded-xl shadow-lg relative">
-								<input
-									type="checkbox"
-									className="absolute bottom-0 right-0 m-2 p-2 bg-white rounded-sm"
-									onChange={() => {
-										if (!checked) {
-											addToList(movie);
-											setChecked(true);
-										} else {
-											setChecked(false);
-										}
+								<button
+									type="button"
+									className="absolute bottom-0 right-0 m-2 px-2 shadow-text shadow-sm bg-background rounded-lg font-poppins font-semibold text-text "
+									onClick={() => {
+										addToList(movie);
 									}}
-								/>
+								>
+									{" "}
+									Add
+								</button>
 								<img
 									src={movie.poster_url}
 									alt={movie.title}

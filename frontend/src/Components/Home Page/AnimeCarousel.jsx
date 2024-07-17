@@ -16,7 +16,7 @@ const AnimeCarousel = () => {
 		});
 		const resanime = response.data.data;
 		setAnime(resanime);
-        console.log("fetched" ,resanime);
+		console.log("fetched", resanime);
 	};
 
 	useEffect(() => {
@@ -34,8 +34,8 @@ const AnimeCarousel = () => {
 	};
 
 	const addToList = (anime) => {
-		console.log( "backend" , anime );
-		fetch("http://localhost:3000/api/v1/watchlist/add", {
+		console.log("backend", anime);
+		fetch("https://stream-sage-backend.vercel.app/api/v1/watchlist/add", {
 			method: "POST",
 			headers: {
 				"Content-Type": "application/json",
@@ -48,7 +48,7 @@ const AnimeCarousel = () => {
 			.then((res) => res.json())
 			.then((data) => console.log(data))
 			.catch((err) => console.log(err));
-            
+		alert("Added to Watchlist");
 	};
 
 	return (
@@ -72,18 +72,16 @@ const AnimeCarousel = () => {
 						{anime.map((anime, index) => (
 							<div key={index} className="flex-shrink-0 w-1/6 p-1">
 								<div className="bg-gray-900 rounded-xl shadow-lg relative">
-									<input
-										type="checkbox"
-										className="absolute bottom-0 right-0 m-2 p-2 bg-white rounded-sm"
-										onChange={() => {
-											if (!checked) {
-												addToList(anime);
-												setChecked(true);
-											} else {
-												setChecked(false);
-											}
+									<button
+										type="button"
+										className="absolute bottom-0 right-0 m-2 px-2 shadow-text shadow-sm bg-background rounded-lg font-poppins font-semibold text-text "
+										onClick={() => {
+											addToList(anime);
 										}}
-									/>
+									>
+										{" "}
+										Add
+									</button>
 									<img
 										src={anime.images.jpg.large_image_url}
 										alt={anime.title_english}
@@ -91,8 +89,8 @@ const AnimeCarousel = () => {
 									/>
 								</div>
 								<div className="pt-6">
-									<div className="text-text text-sm font-koulen block overflow-hidden " >
-										{anime.title_english} 
+									<div className="text-text text-sm font-koulen block overflow-hidden ">
+										{anime.title_english}
 									</div>
 								</div>
 							</div>

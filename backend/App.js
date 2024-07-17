@@ -6,9 +6,19 @@ const mainRouter = require("./routes/index")
 
 app.use(express.json());
 app.use(cors());
+	// cors({
+	// 	origin: "https://streamsage.vercel.app",
+	// 	methods: ["GET", "POST", "PUT", "DELETE"],
+	// 	credentials: true,
+	// }),
+
 
 app.use("/api/v1", mainRouter);
 
 app.listen(3000, () => {
     console.log("Server is running on port 3000");
   });
+
+app.get("/", (req, res) => {
+    res.json("Hello World");
+});
