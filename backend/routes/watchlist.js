@@ -14,9 +14,17 @@ router.post("/add",authMiddleware , async(req,res) =>{
             message : "user not found",
         })
     };
-
     const movieData =  req.body.movie;
-
+    // const exist = await List.findOne({
+    //     userId : req.userId,
+    //     watchList: { $elemMatch: { id: movieId } },
+    // })
+    // console.log(exist);
+    // if(exist){
+    //     return    res.status(409).json({
+    //                message: "failed",
+    //     });
+    // }
     const filter =  {userId : req.userId};
     const update = { $push: { watchList: movieData } };
 
