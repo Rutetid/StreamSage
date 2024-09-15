@@ -35,7 +35,7 @@ const AnimeCarousel = () => {
 
 	const addToList = (anime) => {
 		console.log("backend", anime);
-		fetch("https://streamsage-1.onrender.com/api/v1/watchlist/add", {
+		fetch("https://streamsage0.onrender.com/api/v1/watchlist/add", {
 			method: "POST",
 			headers: {
 				"Content-Type": "application/json",

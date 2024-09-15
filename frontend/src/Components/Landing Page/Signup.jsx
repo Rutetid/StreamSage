@@ -16,7 +16,7 @@ const Signup = () => {
 
 		try {
 			const response = await axios.post(
-				"https://streamsage-1.onrender.com/api/v1/user/signup",
+				"https://streamsage0.onrender.com/api/v1/user/signup",
 				{
 					username,
 					password,
