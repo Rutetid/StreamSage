@@ -134,8 +134,7 @@ export default function Trending({
             ))}
         </div>
       
-    </div>
-	
-	</div>
+        </div>
+      </div>
   )
 }

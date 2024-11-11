@@ -4,13 +4,11 @@ const app =  express();
 const cors = require("cors");
 const mainRouter = require("./routes/index")
 
+
+app.use(cors({ origin: "https://stream-sage-oksh.vercel.app" }));
+
+
 app.use(express.json());
-app.use(cors());
-	// cors({
-	// 	origin: "https://streamsage.vercel.app",
-	// 	methods: ["GET", "POST", "PUT", "DELETE"],
-	// 	credentials: true,
-	// }),
 
 
 app.use("/api/v1", mainRouter);
