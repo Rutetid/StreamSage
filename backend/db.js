@@ -73,7 +73,7 @@ const watchlistSchema = new mongoose.Schema({
             images : {jpg :{large_image_url : {type : String}}},
             poster_url : {type : String},
             description : {type : String},
-
+            score : {type : String},
         }],
     }
 })

@@ -10,7 +10,7 @@ const Entry = ({ movie, index }) => {
 		try {
 			const token = localStorage.getItem("token");
 			const response = await axios.put(
-				"https://streamsage-1.onrender.com/api/v1/watchlist/remove",
+				"https://streamsage0.onrender.com/api/v1/watchlist/remove",
 				{ id: id },
 				{
 					headers: {

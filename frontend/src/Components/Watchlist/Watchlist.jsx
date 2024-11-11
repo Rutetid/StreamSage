@@ -1,104 +1,160 @@
-import React, { useState } from "react";
-import Navbar from "../Home Page/Navbar";
-import Entry from "./Entry";
-import axios from "axios";
-import { useEffect } from "react";
-import Popup from "../Home Page/Popup";
+import React, { useState, useEffect } from 'react';
 
 const Watchlist = () => {
+  const [movies, setMovies] = useState([]);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [moviesPerPage] = useState(10);
+  const [selectedMovie, setSelectedMovie] = useState(null);
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
+  useEffect(() => {
+    fetchMovies();
+  }, []);
 
-	const [isMenuVisible, setIsMenuVisible] = useState(false);
-	const [mov, setMov] = useState([]);
-	const token = localStorage.getItem("token");
-	const fetchData = async () => {
-		const response = await axios.get(
-			"https://streamsage-1.onrender.com/api/v1/watchlist/list",
-			{
-				headers: {
-					"Content-Type": "application/json",
-					authorization: `Bearer ${token}`,
-				},
-			},
-		);
-		const movies = response.data.movies;
-		const normalizedMovies = movies.map((movie) => {
-			// Normalize title
-			const title = movie.title_english || movie.title || movie.name;
-			const id = movie.id ||  movie.mal_id;
-			// Normalize image URL
-			// Assuming the properties could be 'image_url', 'poster', or similar
-			let imageUrl;
-			if (movie.poster_url) {
-				imageUrl = movie.poster_url;
-			} else if (movie.poster_path) {
-				imageUrl = `https://image.tmdb.org/t/p/w500${movie.poster_path}`;
-			} else if (movie.images?.jpg?.large_image_url) {
-				imageUrl = movie.images.jpg.large_image_url;
-			}
+  const fetchMovies = async () => {
+    try {
+      const token = localStorage.getItem("token");
+      const response = await fetch(
+        "https://streamsage-1.onrender.com/api/v1/watchlist/list",
+        {
+          headers: {
+            "Content-Type": "application/json",
+            "Authorization": `Bearer ${token}`,
+          },
+        }
+      );
+      const data = await response.json();
+      const normalizedMovies = data.movies.map(movie => ({
+        id: movie.id || movie.mal_id,
+        normalizedTitle: movie.title_english || movie.title || movie.name,
+        normalizedImageUrl: movie.poster_url || 
+          (movie.poster_path ? `https://image.tmdb.org/t/p/w500${movie.poster_path}` : null) ||
+          movie.images?.jpg?.large_image_url,
+        normalizedRating: movie.rating || movie.score,
+        overview: movie.overview || movie.synopsis || "No overview available."
+      }));
+      setMovies(normalizedMovies);
+    } catch (error) {
+      console.error("Error fetching movies:", error);
+    }
+  };
 
-			// Normalize rating
-			// Assuming the properties could be 'rating', 'score', or similar
-			const rating = movie.rating || movie.score;
+  const removeFromList = async (id) => {
+    try {
+      const token = localStorage.getItem("token");
+      const response = await fetch(
+        "https://streamsage-1.onrender.com/api/v1/watchlist/remove",
+        {
+          method: 'PUT',
+          headers: {
+            "Content-Type": "application/json",
+            "Authorization": `Bearer ${token}`,
+          },
+          body: JSON.stringify({ id: id })
+        }
+      );
+      if (response.ok) {
+        setMovies(movies.filter(movie => movie.id !== id));
+      } else {
+        console.error("Failed to remove movie");
+      }
+    } catch (error) {
+      console.error("Error removing movie:", error);
+    }
+  };
 
-			// Return a new object with a consistent structure
-			return {
-				...movie, // Spread the original movie object to keep other properties
-				normalizedTitle: title, // Add the normalized title
-				normalizedImageUrl: imageUrl, // Add the normalized image URL
-				normalizedRating: rating, // Add the normalized rating
+  const indexOfLastMovie = currentPage * moviesPerPage;
+  const indexOfFirstMovie = indexOfLastMovie - moviesPerPage;
+  const currentMovies = movies.slice(indexOfFirstMovie, indexOfLastMovie);
 
-			};
-		});
+  const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
-		setMov(normalizedMovies);
-	};
-	useEffect(() => {
-		fetchData();
-	}, []);
-	console.log(mov);
+  const openModal = (movie) => {
+    setSelectedMovie(movie);
+    setIsModalOpen(true);
+  };
 
-	return (
-		<div>
-			<Navbar
-				setIsMenuVisible={setIsMenuVisible}
-				isMenuVisible={isMenuVisible}
-			/>
-			{isMenuVisible && <Popup />}
-			<div className="bg-background min-h-screen pb-20">
-				<h1 className="font-poppins font-bold text-6xl text-text flex justify-center pt-12 ">
-					{" "}
-					Watchlist{" "}
-				</h1>
-				{/* Topbar (plan to watch , completed) */}
-				{/* <div className="flex col-3  bg-primary justify-around mx-96 font-poppins font-bold text-2xl mt-20  ">
-						<div className="flex justify-center w-52">
-							<h1>All Entries</h1>
-						</div>
-						<div className="flex justify-center w-52">
-							<h1>Plan to Watch</h1>
-						</div>
-						<div className="flex justify-center w-52">
-							<h1>Completed</h1>
-						</div>
-					</div> */}
-
-				<div className="h-16 bg-primary mx-48 mt-16 flex items-center font-poppins font-bold text-2xl">
-					<div className="w-1/12 flex justify-center">#</div>
-					<div className="w-7/12 ">Title</div>
-					<div className="w-2/12 flex justify-start">Rating</div>
-					<div className="w-1/12">Status</div>
-					<div className="w-40 bg-accent "> </div>
-				</div>
-
-				{mov.map((movie, index) => (
-					<Entry key={index} movie={movie} index={index + 1}>
-						{" "}
-					</Entry>
-				))}
-			</div>
-		</div>
-	);
+  return (
+    <div className="min-h-screen bg-gray-900 text-gray-100 p-8">
+      <h1 className="text-4xl font-bold mb-8 text-center">Watchlist</h1>
+      <div className="overflow-x-auto">
+        <table className="w-full border-collapse">
+          <thead>
+            <tr className="bg-gray-800">
+              <th className="p-3 text-left">#</th>
+              <th className="p-3 text-left">Title</th>
+              <th className="p-3 text-left">Rating</th>
+              <th className="p-3 text-left">Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            {currentMovies.map((movie, index) => (
+              <tr key={movie.id} className="border-b border-gray-700 hover:bg-gray-800">
+                <td className="p-3">{indexOfFirstMovie + index + 1}</td>
+                <td className="p-3 flex items-center">
+                  <img 
+                    src={movie.normalizedImageUrl || '/placeholder.svg'} 
+                    alt={movie.normalizedTitle} 
+                    className="w-12 h-16 object-cover mr-3"
+                  />
+                  <button 
+                    className="text-left hover:text-blue-400 focus:outline-none focus:ring-2 focus:ring-blue-400 rounded"
+                    onClick={() => openModal(movie)}
+                  >
+                    {movie.normalizedTitle}
+                  </button>
+                </td>
+                <td className="p-3">{movie.normalizedRating ? movie.normalizedRating.toFixed(1) : 'N/A'}</td>
+                <td className="p-3">
+                  <button 
+                    onClick={() => removeFromList(movie.id)}
+                    className="bg-red-600 hover:bg-red-700 text-white py-1 px-3 rounded focus:outline-none focus:ring-2 focus:ring-red-500"
+                    aria-label={`Remove ${movie.normalizedTitle} from watchlist`}
+                  >
+                    Remove
+                  </button>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+      <div className="mt-4 flex justify-center">
+        {Array.from({ length: Math.ceil(movies.length / moviesPerPage) }, (_, i) => (
+          <button
+            key={i}
+            onClick={() => paginate(i + 1)}
+            className={`mx-1 px-3 py-1 rounded focus:outline-none focus:ring-2 focus:ring-blue-400 ${
+              currentPage === i + 1 ? 'bg-blue-600 text-white' : 'bg-gray-700 text-gray-300 hover:bg-gray-600'
+            }`}
+            aria-label={`Go to page ${i + 1}`}
+          >
+            {i + 1}
+          </button>
+        ))}
+      </div>
+      {isModalOpen && selectedMovie && (
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4" role="dialog" aria-modal="true">
+          <div className="bg-gray-800 p-6 rounded-lg max-w-2xl w-full">
+            <h2 className="text-2xl font-bold mb-4">{selectedMovie.normalizedTitle}</h2>
+            <img 
+              src={selectedMovie.normalizedImageUrl || '/placeholder.svg'} 
+              alt={selectedMovie.normalizedTitle} 
+              className="w-32 h-48 object-cover float-left mr-4 mb-2"
+            />
+            <p className="text-gray-300 mb-4">{selectedMovie.overview}</p>
+            <p className="text-gray-300">Rating: {selectedMovie.normalizedRating ? selectedMovie.normalizedRating.toFixed(1) : 'N/A'}</p>
+            <button 
+              onClick={() => setIsModalOpen(false)}
+              className="mt-4 bg-blue-600 hover:bg-blue-700 text-white py-2 px-4 rounded focus:outline-none focus:ring-2 focus:ring-blue-400"
+            >
+              Close
+            </button>
+          </div>
+        </div>
+      )}
+    </div>
+  );
 };
 
 export default Watchlist;

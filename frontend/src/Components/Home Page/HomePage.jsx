@@ -2,12 +2,12 @@ import React from "react";
 import Navbar from "./Navbar";
 import SampleCard from "./SampleCard";
 import Anime from "../../assets/anime.jpg";
-import Trending from "./MyCarousel";
+import Trending from "./Trending";
 import Popup from "./Popup";
 import { useState } from "react";
 import AnimeCarousel from "./AnimeCarousel";
 import MoviesCarousel from "./MoviesCarousel";
-import DramaCarousel from "./DramaCarousel";
+
 import WebSeriesCarousel from "./WebSeriesCarousel";
 
 const HomePage = () => {
@@ -21,14 +21,18 @@ const HomePage = () => {
 			{isMenuVisible && <Popup />}
 
 			<div>
-				<h1 className="font-poppins font-bold text-6xl text-text flex justify-center pt-20 ">
-					{" "}
-					Trending{" "}
-				</h1>
-
-				<div className="flex 3xl:px-32 px-6 pt-20 ">
+				<div className="flex justify-center pt-10">
+					
+					<h1 className="font-poppins  text-xl text-text ml-5 text-center">						
+						Trending
+					</h1>
+				</div>
+				<div className="flex 3xl:px-32 px-6  ">
 					<Trending />
 				</div>
+				{/* <h1 className="font-poppins font-bold text-6xl text-text flex justify-center pt-20 ">	
+					Trending
+				</h1> */}
 			</div>
 			{/* 
 			<div className="pt-32">
@@ -42,7 +46,7 @@ const HomePage = () => {
 				</div>
 			</div> */}
 
-			<div className="pt-32">
+			<div className="pt-20">
 				<div className="flex">
 					<div className="bg-primary w-2 text-primary ml-10"> </div>
 					<h1 className="font-poppins font-bold text-3xl text-text ml-5">
@@ -70,18 +74,7 @@ const HomePage = () => {
 				</div>
 			</div>
 
-			<div className="pt-32">
-				<div className="flex">
-					<div className="bg-primary w-2 text-primary ml-10"> </div>
-					<h1 className="font-poppins font-bold text-3xl text-text ml-5">
-						{" "}
-						Top in Drama
-					</h1>
-				</div>
-				<div className="flex 3xl:px-32 px-6 pt-12 ">
-					<DramaCarousel />
-				</div>
-			</div>
+			
 
 			<div className="py-32">
 				<div className="flex">
