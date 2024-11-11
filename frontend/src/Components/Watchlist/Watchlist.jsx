@@ -24,15 +24,26 @@ const Watchlist = () => {
         }
       );
       const data = await response.json();
-      const normalizedMovies = data.movies.map(movie => ({
-        id: movie.id || movie.mal_id,
-        normalizedTitle: movie.title_english || movie.title || movie.name,
-        normalizedImageUrl: movie.poster_url || 
-          (movie.poster_path ? `https://image.tmdb.org/t/p/w500${movie.poster_path}` : null) ||
-          movie.images?.jpg?.large_image_url,
-        normalizedRating: movie.rating || movie.score,
-        overview: movie.overview || movie.synopsis || "No overview available."
-      }));
+      const normalizedMovies = data.movies.map((movie) => {
+        const rawRating = movie.score || movie.vote_average;
+        const normalizedRating =
+          rawRating && !isNaN(rawRating)
+            ? Number(rawRating).toFixed(1)
+            : null;
+        return {
+          id: movie.id || movie.mal_id,
+          normalizedTitle: movie.title_english || movie.title || movie.name,
+          normalizedImageUrl:
+            movie.poster_url ||
+            (movie.poster_path
+              ? `https://image.tmdb.org/t/p/w500${movie.poster_path}`
+              : null) ||
+            movie.images?.jpg?.large_image_url,
+          normalizedRating,
+          overview:
+            movie.overview || movie.synopsis || "No overview available.",
+        };
+      });
       setMovies(normalizedMovies);
     } catch (error) {
       console.error("Error fetching movies:", error);
@@ -89,24 +100,29 @@ const Watchlist = () => {
           </thead>
           <tbody>
             {currentMovies.map((movie, index) => (
-              <tr key={movie.id} className="border-b border-gray-700 hover:bg-gray-800">
+              <tr
+                key={movie.id}
+                className="border-b border-gray-700 hover:bg-gray-800"
+              >
                 <td className="p-3">{indexOfFirstMovie + index + 1}</td>
                 <td className="p-3 flex items-center">
-                  <img 
-                    src={movie.normalizedImageUrl || '/placeholder.svg'} 
-                    alt={movie.normalizedTitle} 
+                  <img
+                    src={movie.normalizedImageUrl || '/placeholder.svg'}
+                    alt={movie.normalizedTitle}
                     className="w-12 h-16 object-cover mr-3"
                   />
-                  <button 
+                  <button
                     className="text-left hover:text-blue-400 focus:outline-none focus:ring-2 focus:ring-blue-400 rounded"
                     onClick={() => openModal(movie)}
                   >
                     {movie.normalizedTitle}
                   </button>
                 </td>
-                <td className="p-3">{movie.normalizedRating ? movie.normalizedRating.toFixed(1) : 'N/A'}</td>
                 <td className="p-3">
-                  <button 
+                  {movie.normalizedRating || 'N/A'}
+                </td>
+                <td className="p-3">
+                  <button
                     onClick={() => removeFromList(movie.id)}
                     className="bg-red-600 hover:bg-red-700 text-white py-1 px-3 rounded focus:outline-none focus:ring-2 focus:ring-red-500"
                     aria-label={`Remove ${movie.normalizedTitle} from watchlist`}
@@ -124,9 +140,8 @@ const Watchlist = () => {
           <button
             key={i}
             onClick={() => paginate(i + 1)}
-            className={`mx-1 px-3 py-1 rounded focus:outline-none focus:ring-2 focus:ring-blue-400 ${
-              currentPage === i + 1 ? 'bg-blue-600 text-white' : 'bg-gray-700 text-gray-300 hover:bg-gray-600'
-            }`}
+            className={`mx-1 px-3 py-1 rounded focus:outline-none focus:ring-2 focus:ring-blue-400 ${currentPage === i + 1 ? 'bg-blue-600 text-white' : 'bg-gray-700 text-gray-300 hover:bg-gray-600'
+              }`}
             aria-label={`Go to page ${i + 1}`}
           >
             {i + 1}
@@ -137,14 +152,14 @@ const Watchlist = () => {
         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4" role="dialog" aria-modal="true">
           <div className="bg-gray-800 p-6 rounded-lg max-w-2xl w-full">
             <h2 className="text-2xl font-bold mb-4">{selectedMovie.normalizedTitle}</h2>
-            <img 
-              src={selectedMovie.normalizedImageUrl || '/placeholder.svg'} 
-              alt={selectedMovie.normalizedTitle} 
+            <img
+              src={selectedMovie.normalizedImageUrl || '/placeholder.svg'}
+              alt={selectedMovie.normalizedTitle}
               className="w-32 h-48 object-cover float-left mr-4 mb-2"
             />
             <p className="text-gray-300 mb-4">{selectedMovie.overview}</p>
             <p className="text-gray-300">Rating: {selectedMovie.normalizedRating ? selectedMovie.normalizedRating.toFixed(1) : 'N/A'}</p>
-            <button 
+            <button
               onClick={() => setIsModalOpen(false)}
               className="mt-4 bg-blue-600 hover:bg-blue-700 text-white py-2 px-4 rounded focus:outline-none focus:ring-2 focus:ring-blue-400"
             >
