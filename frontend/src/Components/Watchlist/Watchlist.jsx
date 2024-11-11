@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
-
+import Navbar from '../Home Page/Navbar';
 const Watchlist = () => {
+  const [isMenuVisible, setIsMenuVisible] = useState(false);
   const [movies, setMovies] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [moviesPerPage] = useState(10);
@@ -11,25 +12,26 @@ const Watchlist = () => {
     fetchMovies();
   }, []);
 
+  const roundUpToOneDecimalPlace = (num) => {
+    return Math.ceil(num * 10) / 10;
+  };
   const fetchMovies = async () => {
-    try {
-      const token = localStorage.getItem("token");
-      const response = await fetch(
-        "https://streamsage-1.onrender.com/api/v1/watchlist/list",
-        {
-          headers: {
-            "Content-Type": "application/json",
-            "Authorization": `Bearer ${token}`,
-          },
-        }
-      );
-      const data = await response.json();
-      const normalizedMovies = data.movies.map((movie) => {
-        const rawRating = movie.score || movie.vote_average;
-        const normalizedRating =
-          rawRating && !isNaN(rawRating)
-            ? Number(rawRating).toFixed(1)
-            : null;
+      try {
+        const token = localStorage.getItem("token");
+        const response = await fetch(
+          "https://streamsage-1.onrender.com/api/v1/watchlist/list",
+          {
+            headers: {
+              "Content-Type": "application/json",
+              "Authorization": `Bearer ${token}`,
+            },
+          }
+        );
+        const data = await response.json();
+        const normalizedMovies = data.movies.map((movie) => {
+          const rawRating = movie.score || movie.vote_average;
+          const normalizedRating =
+            rawRating && !isNaN(rawRating) ? Number(rawRating) : null;
         return {
           id: movie.id || movie.mal_id,
           normalizedTitle: movie.title_english || movie.title || movie.name,
@@ -49,6 +51,7 @@ const Watchlist = () => {
       console.error("Error fetching movies:", error);
     }
   };
+  
 
   const removeFromList = async (id) => {
     try {
@@ -87,6 +90,11 @@ const Watchlist = () => {
 
   return (
     <div className="min-h-screen bg-gray-900 text-gray-100 p-8">
+      <Navbar
+				setIsMenuVisible={setIsMenuVisible}
+				isMenuVisible={isMenuVisible}
+			/>
+			{isMenuVisible && <Popup />}
       <h1 className="text-4xl font-bold mb-8 text-center">Watchlist</h1>
       <div className="overflow-x-auto">
         <table className="w-full border-collapse">
@@ -119,7 +127,9 @@ const Watchlist = () => {
                   </button>
                 </td>
                 <td className="p-3">
-                  {movie.normalizedRating || 'N/A'}
+                  {movie.normalizedRating !== null
+                    ? roundUpToOneDecimalPlace(movie.normalizedRating)
+                    : 'N/A'}
                 </td>
                 <td className="p-3">
                   <button
@@ -157,8 +167,13 @@ const Watchlist = () => {
               alt={selectedMovie.normalizedTitle}
               className="w-32 h-48 object-cover float-left mr-4 mb-2"
             />
-            <p className="text-gray-300 mb-4">{selectedMovie.overview}</p>
-            <p className="text-gray-300">Rating: {selectedMovie.normalizedRating ? selectedMovie.normalizedRating.toFixed(1) : 'N/A'}</p>
+            <p className="text-gray-300 mb-4">{selectedMovie.synopsis||selectedMovie.overview  }</p>
+            <p className="text-gray-300">
+              Rating:{' '}
+              {selectedMovie.normalizedRating !== null
+                ? roundUpToOneDecimalPlace(selectedMovie.normalizedRating)
+                : 'N/A'}
+            </p>
             <button
               onClick={() => setIsModalOpen(false)}
               className="mt-4 bg-blue-600 hover:bg-blue-700 text-white py-2 px-4 rounded focus:outline-none focus:ring-2 focus:ring-blue-400"

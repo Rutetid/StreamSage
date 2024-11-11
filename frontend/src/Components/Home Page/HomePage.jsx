@@ -1,7 +1,7 @@
 import React from "react";
 import Navbar from "./Navbar";
-import SampleCard from "./SampleCard";
-import Anime from "../../assets/anime.jpg";
+// import SampleCard from "./SampleCard";
+// import Anime from "../../assets/anime.jpg";
 import Trending from "./Trending";
 import Popup from "./Popup";
 import { useState } from "react";

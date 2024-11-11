@@ -37,6 +37,9 @@ export default function Trending({
     fetchMovies()
   }, [])
 
+  useEffect(() => {
+    setCurr(0);
+  }, [movies]);
   const addToList = (movie) => {
     fetch("https://streamsage0.onrender.com/api/v1/watchlist/add", {
       method: "POST",
@@ -55,20 +58,23 @@ export default function Trending({
 
   const prev = () => setCurr((curr) => (curr === 0 ? movies.length - 1 : curr - 1))
   const next = () => setCurr((curr) => (curr === movies.length - 1 ? 0 : curr + 1))
-
   useEffect(() => {
-    if (!autoSlide) return
-    const slideInterval = setInterval(next, autoSlideInterval)
-    return () => clearInterval(slideInterval)
-  }, [autoSlide, autoSlideInterval])
+    if (!autoSlide || movies.length === 0) return;
+
+    const slideInterval = setInterval(() => {
+      setCurr((curr) => (curr === movies.length - 1 ? 0 : curr + 1));
+    }, autoSlideInterval);
+
+    return () => clearInterval(slideInterval);
+  }, [autoSlide, autoSlideInterval, movies.length]);
 
   if (loading) {
-    return <div className="flex justify-center items-center h-64">Loading...</div>
+    return <div className="flex justify-center items-center h-64">Loading...</div>;
   }
 
   return (
 
-    <div className="overflow-hidden relative w-full bg-black">
+    <div className="overflow-hidden relative w-full bg-[040a10] ">
       <div
         className="flex transition-transform ease-out duration-500"
         style={{ transform: `translateX(-${curr * 100}%)` }}
@@ -84,14 +90,22 @@ export default function Trending({
                     className="w-full h-full object-cover rounded-lg"
                   />
                 </div>
+                {/* <div className="absolute bottom-4 left-4 right-4 flex justify-between items-end">
+                  <h3 className="text-white text-md  font-sans line-clamp-2">
+                    {movie.title || movie.name}
+                  </h3>
+                </div> */}
                 <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                  <div className="absolute bottom-4 left-4 right-4 flex justify-between items-end">
-                    <h3 className="text-white text-md  font-sans line-clamp-2">
+                  <div className="absolute bottom-4 left-4 right-4 flex flex-col items-start p-4">
+                    <h3 className="text-white text-xl font-bold mb-2">
                       {movie.title || movie.name}
                     </h3>
+                    <p className="text-white text-sm mb-4 line-clamp-3">
+                      {movie.overview}
+                    </p>
                     <button
                       onClick={() => addToList(movie)}
-                      className="bg-yellow-400 text-white font-semibold hover:bg-yellow-500 px-4 py-2 rounded transition-colors duration-200"
+                      className="bg-yellow-500 text-black font-semibold hover:bg-yellow-600 px-4 py-2 rounded transition-colors duration-200"
                     >
                       Add to Watchlist
                     </button>
@@ -121,20 +135,19 @@ export default function Trending({
       >
         <ChevronRight className="h-6 w-6" />
       </button>
-	  <div className="absolute bottom-1 right-0 left-0">
+      <div className="absolute bottom-1 right-0 left-0">
         <div className="flex items-center justify-center gap-2">
           {movies.length > 0 &&
             movies.map((_, i) => (
               <div
                 key={i}
-                className={`transition-all w-1 h-1 bg-white rounded-full ${
-                  curr === i ? "scale-150" : "bg-opacity-50"
-                }`}
+                className={`transition-all w-1 h-1 bg-white rounded-full ${curr === i ? "scale-150" : "bg-opacity-50"
+                  }`}
               />
             ))}
         </div>
-      
-        </div>
+
       </div>
+    </div>
   )
 }
