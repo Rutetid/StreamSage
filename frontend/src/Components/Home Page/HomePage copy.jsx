@@ -47,7 +47,7 @@ const HomePage = () => {
 				setIsMenuVisible={setIsMenuVisible}
 				isMenuVisible={isMenuVisible}
 			/>
-			{isMenuVisible && <Popup />}
+			{isMenuVisible && <Popup setIsMenuVisible={setIsMenuVisible} toggleMenu={() => setIsMenuVisible(false)} />}
 
 			{/* Hero Section with Trending */}
 			<div

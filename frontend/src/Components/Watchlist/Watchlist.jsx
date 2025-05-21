@@ -111,7 +111,7 @@ const Watchlist = () => {
 				setIsMenuVisible={setIsMenuVisible}
 				isMenuVisible={isMenuVisible}
 			/>
-			{isMenuVisible && <Popup />}
+			{isMenuVisible && <Popup setIsMenuVisible={setIsMenuVisible} toggleMenu={() => setIsMenuVisible(false)} />}
 
 			<div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
 				<h1 className="text-4xl font-bold mb-8 text-center">My Watchlist</h1>

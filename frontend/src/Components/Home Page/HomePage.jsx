@@ -47,7 +47,7 @@ const HomePage = () => {
 				setIsMenuVisible={setIsMenuVisible}
 				isMenuVisible={isMenuVisible}
 			/>
-			{isMenuVisible && <Popup />}
+			{isMenuVisible && <Popup setIsMenuVisible={setIsMenuVisible} toggleMenu={() => setIsMenuVisible(false)} />}
 
 			{/* Main content container with no extra top margin to avoid white line */}
 			<div className="max-w-screen-2xl mx-auto pt-10">

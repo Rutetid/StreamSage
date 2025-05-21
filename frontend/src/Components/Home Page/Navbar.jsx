@@ -1,11 +1,12 @@
-import React from "react";
+import React, { useRef } from "react";
 import User from "../../assets/user.svg";
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 
-const Navbar = ({ IsMenuVisible, setIsMenuVisible }) => {
+const Navbar = ({ isMenuVisible, setIsMenuVisible }) => {
 	const [isSignedUp, setIsSignedUp] = useState(false);
 	const [scrolled, setScrolled] = useState(false);
+	const userButtonRef = useRef(null);
 
 	useEffect(() => {
 		const usertoken = localStorage.getItem("token");
@@ -66,18 +67,28 @@ const Navbar = ({ IsMenuVisible, setIsMenuVisible }) => {
 				<div className="cursor-pointer hover:text-text transition-colors duration-300">
 					About
 				</div>
-			</div>
-			{isSignedUp ? (
-				<button
-					className="pl-4 sm:pl-8 lg:pl-12 3xl:pl-40 hover:opacity-80 transition-opacity duration-300"
+			</div>			{isSignedUp ? (				<button
+					ref={userButtonRef}
+					className="ml-4 sm:ml-8 lg:ml-12 3xl:ml-40 relative group"
 					type="button"
 					onClick={toggleMenu}
+					aria-label="User menu"
 				>
-					<img src={User} alt="user" className="size-8 md:size-10" />
+					<div className="p-0.5 rounded-full bg-gradient-to-r from-blue-500/50 to-primary/50 group-hover:from-blue-500/70 group-hover:to-primary/70 transition-all duration-300">
+						<div className="bg-background rounded-full p-1">
+							<img src={User} alt="user" className="size-7 md:size-8" />
+						</div>
+					</div>
+					{isMenuVisible && (
+						<div className="absolute top-0 right-0 h-2 w-2 bg-blue-500 rounded-full animate-pulse"></div>
+					)}
 				</button>
 			) : (
-				<div className="border-2 rounded-md py-2 px-3 border-primary text-primary font-poppins font-semibold text-sm md:text-md 3xl:text-lg hover:bg-primary hover:text-background transition-all duration-300">
-					<Link to="/signup">Sign up</Link>
+				<div className="relative group">
+					<div className="absolute -inset-0.5 bg-gradient-to-r from-primary/50 to-blue-600/50 rounded-lg blur opacity-30 group-hover:opacity-80 transition duration-300"></div>
+					<Link to="/signup" className="relative px-4 py-2 bg-background rounded-md border border-primary/40 text-primary font-poppins font-semibold text-sm md:text-md 3xl:text-lg hover:text-white transition-colors duration-300">
+						Sign up
+					</Link>
 				</div>
 			)}
 		</div>
