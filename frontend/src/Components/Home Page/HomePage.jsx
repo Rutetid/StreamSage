@@ -42,7 +42,7 @@ const CategoryHeader = ({ icon, title, viewMoreLink }) => {
 const HomePage = () => {
 	const [isMenuVisible, setIsMenuVisible] = useState(false);
 	return (
-		<div className="min-h-screen bg-gray-900 text-text">
+		<div className="min-h-screen bg-gray-900 text-text has-navbar">
 			<Navbar
 				setIsMenuVisible={setIsMenuVisible}
 				isMenuVisible={isMenuVisible}

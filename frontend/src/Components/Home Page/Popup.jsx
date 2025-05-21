@@ -24,7 +24,9 @@ const Popup = ({ setIsMenuVisible, toggleMenu }) => {
 			// If user clicks anywhere except the popup
 			if (popupRef.current && !popupRef.current.contains(event.target)) {
 				// Check if the click is on the user button in navbar
-				const navbarUserButton = document.querySelector("[aria-label='User menu']");
+				const navbarUserButton = document.querySelector(
+					"[aria-label='User menu']",
+				);
 				if (navbarUserButton?.contains(event.target)) {
 					// This is handled by the button's onClick, so we don't want to interfere
 					return;

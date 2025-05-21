@@ -21,9 +21,9 @@ function LandingPage() {
 		const userToken = localStorage.getItem("token");
 		setIsSignedUp(!!userToken);
 	}, []);
-
 	return (
-		<div className="bg-background min-h-screen">			<Navbar
+		<div className="bg-background min-h-screen has-navbar">
+			<Navbar
 				isMenuVisible={isMenuVisible}
 				setIsMenuVisible={setIsMenuVisible}
 			/>

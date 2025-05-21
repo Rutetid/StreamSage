@@ -106,7 +106,7 @@ const Watchlist = () => {
 	}, [fetchMovies]);
 
 	return (
-		<div className="min-h-screen bg-gray-900 text-gray-100">
+		<div className="min-h-screen bg-gray-900 text-gray-100 has-navbar">
 			<Navbar
 				setIsMenuVisible={setIsMenuVisible}
 				isMenuVisible={isMenuVisible}

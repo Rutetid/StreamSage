@@ -41,7 +41,7 @@ const HomePage = () => {
 	}, []);
 
 	return (
-		<div className="min-h-screen bg-top text-text">
+		<div className="min-h-screen bg-top text-text has-navbar">
 			{/* Navbar */}
 			<Navbar
 				setIsMenuVisible={setIsMenuVisible}
