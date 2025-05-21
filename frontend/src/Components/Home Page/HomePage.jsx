@@ -17,7 +17,7 @@ const HomePage = () => {
 			<Navbar
 				setIsMenuVisible={setIsMenuVisible}
 				isMenuVisible={isMenuVisible}
-			/>
+			/>	
 			{isMenuVisible && <Popup />}
 
 			<div>
