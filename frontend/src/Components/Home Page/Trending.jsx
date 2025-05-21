@@ -91,39 +91,38 @@ export default function Trending({
                   />
                 </div>
 
-                {/* Movie Title */}
-                <div className="absolute bottom-4 left-4 right-4 flex justify-between items-end">
-                  <h3 className="text-white text-md  font-sans line-clamp-2">
-                    {movie.title || movie.name}
-                  </h3>
-                </div>
+                {/* Movie Title - Default state */}
+								<div className="absolute bottom-4 left-4 right-4 flex justify-between items-end group-hover:opacity-0 group-hover:translate-y-[-100px] group-hover:translate-x-[16px] transition-all duration-800">
+									<h3 className="text-white text-xl font-poppins font-semibold line-clamp-2">
+										{movie.title || movie.name}
+									</h3>
+								</div>
 
-
-                <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                  <div className="absolute bottom-4 left-4 right-4 flex flex-col items-start p-4">
-                    <h3 className="text-white text-xl font-bold mb-2">
-                      {movie.title || movie.name}
-                    </h3>
-                    <p className="text-white text-sm mb-4 line-clamp-3">
-                      {movie.overview}
-                    </p>
-                    <button
-                      onClick={() => addToList(movie)}
-                      className="bg-yellow-500 text-black font-semibold hover:bg-yellow-600 px-4 py-2 rounded transition-colors duration-200"
-                    >
-                      Add to Watchlist
-                    </button>
-                  </div>
-                </div>
-              </div>
-            </div>
-          ))
-        ) : (
-          <div className="flex-shrink-0 w-full flex justify-center items-center h-64">
-            No movies available
-          </div>
-        )}
-      </div>
+								<div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-800">
+									<div className="absolute bottom-4 left-4 right-4 flex flex-col items-start p-4 transform translate-y-[40px] group-hover:translate-y-0 transition-transform duration-800">
+										<h3 className="text-white text-xl font-bold mb-2">
+											{movie.title || movie.name}
+										</h3>
+										<p className="text-white text-sm mb-4 line-clamp-3">
+											{movie.overview}
+										</p>
+										<button
+											onClick={() => addToList(movie)}
+											className="bg-yellow-500 text-black font-semibold hover:bg-yellow-600 px-4 py-2 rounded transition-colors duration-800"
+										>
+											Add to Watchlist
+										</button>
+									</div>
+								</div>
+							</div>
+						</div>
+					))
+				) : (
+					<div className="flex-shrink-0 w-full flex justify-center items-center h-64">
+						No movies available
+					</div>
+				)}
+			</div>
 
       <button
         onClick={prev}
