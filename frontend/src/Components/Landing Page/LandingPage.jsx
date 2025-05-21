@@ -5,6 +5,7 @@ import Drama from "../../assets/Drama.jpg";
 import WebSeries from "../../assets/got.jpg";
 import { Link } from "react-router-dom";
 import { useState , useEffect } from "react";
+import Navbar from "../Home Page/Navbar";
 
 
 function LandingPage() {
@@ -19,28 +20,9 @@ function LandingPage() {
 
   return (
 			<div className="bg-background min-h-screen">
-				<div className="flex justify-around items-center pt-4 py-2 px-24 bg-top shadow-xl ">
-					<h1 className="text-4xl 3xl:text-5xl font-koulen font-bold text-text ">
-						STREAMSAGE{" "}
-					</h1>
-					<div className="flex gap-20 items-center font-poppins font-medium text-xl 3xl:text-2xl  text-primary pt-1">
-						<h1>Home</h1>
-						<h1>Features</h1>
-						<h1>About</h1>
-					</div>
+				<Navbar />
 
-					{isSignedUp ? (
-						<div className="border-2 rounded-md py-2 px-3 border-primary text-primary font-poppins font-semibold text-md 3xl:text-lg">
-							<Link to="/homepage">Home</Link>
-						</div>
-					) : (
-						<div className="border-2 rounded-md py-2 px-3 border-primary text-primary font-poppins font-semibold text-md 3xl:text-lg">
-							<Link to="/signup">Sign up</Link>
-						</div>
-					)}
-				</div>
-
-				<div className="mt-24 ">
+				<div className="pt-16 ">
 					<h1 className="font-poppins font-bold text-4xl flex justify-center text-text lg:text-6xl xl:text-6xl 2xl:text-7xl 3xl:text-8xl">
 						One Place To Track All Your{" "}
 					</h1>

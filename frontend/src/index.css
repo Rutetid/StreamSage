@@ -17,8 +17,31 @@
   }
 }
 
-/* Apply no-scrollbar to html and body */
 html, body {
   @apply no-scrollbar;
   overflow-y: auto;
+  scroll-behavior: smooth;
+  margin: 0;
+  padding: 0;
+}
+
+/* Precise padding to account for fixed navbar - adjusted to remove white line */
+body {
+  padding-top: 56px; /* Slightly reduced to remove the gap */
+  background-color: var(--bg-background, #121212); /* Match the background color */
+}
+
+.scrolled-navbar {
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+}
+
+/* Navbar has no bottom border */
+.navbar-bottom-fix {
+  border-bottom: 0;
+}
+
+@media (min-width: 768px) {
+  body {
+    padding-top: 66px; /* Slightly reduced to remove the gap */
+  }
 }

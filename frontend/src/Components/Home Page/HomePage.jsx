@@ -1,91 +1,107 @@
 import React from "react";
 import Navbar from "./Navbar";
-// import SampleCard from "./SampleCard";
-// import Anime from "../../assets/anime.jpg";
 import Trending from "./Trending";
 import Popup from "./Popup";
 import { useState } from "react";
 import AnimeCarousel from "./AnimeCarousel";
 import MoviesCarousel from "./MoviesCarousel";
-
 import WebSeriesCarousel from "./WebSeriesCarousel";
+import {
+	ChevronRight,
+	TrendingUp,
+	Film,
+	Tv2,
+	Clapperboard,
+} from "lucide-react";
+
+// CategoryHeader component
+const CategoryHeader = ({ icon, title, viewMoreLink }) => {
+	const Icon = icon;
+	return (
+		<div className="flex justify-between items-center mb-6 px-4 sm:px-6 lg:px-8">
+			<div className="flex items-center space-x-3">
+				<div className="bg-primary/10 p-2 rounded-lg">
+					<Icon className="text-primary w-5 h-5" />
+				</div>
+				<h2 className="font-poppins font-bold text-xl md:text-2xl text-text">
+					{title}
+				</h2>
+			</div>
+			{viewMoreLink && (
+				<a
+					href={viewMoreLink}
+					className="text-primary flex items-center text-sm hover:text-primary/80 transition-colors duration-200"
+				>
+					View more <ChevronRight className="w-4 h-4 ml-1" />
+				</a>
+			)}
+		</div>
+	);
+};
 
 const HomePage = () => {
 	const [isMenuVisible, setIsMenuVisible] = useState(false);
 	return (
-		<div className="min-h-screen bg-background">
+		<div className="min-h-screen bg-gray-900 text-text">
 			<Navbar
 				setIsMenuVisible={setIsMenuVisible}
 				isMenuVisible={isMenuVisible}
-			/>	
+			/>
 			{isMenuVisible && <Popup />}
 
-			<div>
-				<div className="flex justify-center pt-10">
-					
-					<h1 className="font-poppins  text-xl text-text ml-5 text-center">						
-						Trending
-					</h1>
-				</div>
-				<div className="flex 3xl:px-32 px-6  ">
-					<Trending />
-				</div>
-				{/* <h1 className="font-poppins font-bold text-6xl text-text flex justify-center pt-20 ">	
-					Trending
-				</h1> */}
-			</div>
-			{/* 
-			<div className="pt-32">
-				<span className="font-poppins font-bold text-3xl text-text ml-40">
-					{" "}
-					Recommended for you
-				</span>
-
-				<div className="flex 3xl:px-32 px-40 pt-12 ">
-					<Trending />
-				</div>
-			</div> */}
-
-			<div className="pt-20">
-				<div className="flex">
-					<div className="bg-primary w-2 text-primary ml-10"> </div>
-					<h1 className="font-poppins font-bold text-3xl text-text ml-5">
-						{" "}
-						Top Movies
-					</h1>
+			{/* Main content container with no extra top margin to avoid white line */}
+			<div className="max-w-screen-2xl mx-auto pt-10">
+				{/* Trending section with CategoryHeader component */}
+				<div className="px-4 pb-2">
+					<CategoryHeader
+						icon={TrendingUp}
+						title="Trending Now"
+						viewMoreLink="/trending"
+					/>
+					<div className="rounded-xl overflow-hidden shadow-lg">
+						<Trending autoSlideInterval={5000} />
+					</div>
 				</div>
 
-				<div className="flex 3xl:px-32 px-6 pt-12 ">
-					<MoviesCarousel />
-				</div>
-			</div>
+				{/* Top Movies Section */}
+				<div className="pt-16 px-4">
+					<div className="flex">
+						<div className="bg-primary w-2 text-primary"> </div>
+						<h1 className="font-poppins font-bold text-2xl md:text-3xl text-text ml-5">
+							Top Movies
+						</h1>
+					</div>
 
-			<div className="pt-32">
-				<div className="flex">
-					<div className="bg-primary w-2 text-primary ml-10"> </div>
-					<h1 className="font-poppins font-bold text-3xl text-text ml-5">
-						{" "}
-						Top Anime
-					</h1>
+					<div className="pt-8">
+						<MoviesCarousel />
+					</div>
 				</div>
 
-				<div className="flex 3xl:px-32 px-6 pt-12 ">
-					<AnimeCarousel />
-				</div>
-			</div>
+				{/* Top Anime Section */}
+				<div className="pt-16 px-4">
+					<div className="flex">
+						<div className="bg-primary w-2 text-primary"> </div>
+						<h1 className="font-poppins font-bold text-2xl md:text-3xl text-text ml-5">
+							Top Anime
+						</h1>
+					</div>
 
-			
-
-			<div className="py-32">
-				<div className="flex">
-					<div className="bg-primary w-2 text-primary ml-10"> </div>
-					<h1 className="font-poppins font-bold text-3xl text-text ml-5">
-						{" "}
-						Top Web Series
-					</h1>
+					<div className="pt-8">
+						<AnimeCarousel />
+					</div>
 				</div>
-				<div className="flex 3xl:px-32 px-6 pt-12 ">
-					<WebSeriesCarousel/>
+
+				{/* Top Web Series Section */}
+				<div className="py-16 px-4">
+					<div className="flex">
+						<div className="bg-primary w-2 text-primary"> </div>
+						<h1 className="font-poppins font-bold text-2xl md:text-3xl text-text ml-5">
+							Top Web Series
+						</h1>
+					</div>
+					<div className="pt-8">
+						<WebSeriesCarousel />
+					</div>
 				</div>
 			</div>
 		</div>

@@ -54,7 +54,7 @@ const AnimeCarousel = () => {
   };
 
   return (
-    <div className="relative w-full bg-background">
+    <div className="relative w-full bg-gray-900">
       <button
         className="absolute left-0 top-1/2 -translate-y-1/2 z-10 bg-black bg-opacity-35 text-text hover:text-primary hover:border-primary p-2 rounded-full"
         onClick={handlePrevious}

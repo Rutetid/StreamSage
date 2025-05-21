@@ -1,22 +1,21 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import Navbar from "../Home Page/Navbar";
+import { Trash2, Star, Info } from "lucide-react"; 
+import MovieDetailModal from "./MovieDetailModal"; 
+
 const Watchlist = () => {
 	const [isMenuVisible, setIsMenuVisible] = useState(false);
 	const [movies, setMovies] = useState([]);
 	const [currentPage, setCurrentPage] = useState(1);
-	const [moviesPerPage] = useState(10);
+	const [moviesPerPage] = useState(8); 
 	const [selectedMovie, setSelectedMovie] = useState(null);
 	const [isModalOpen, setIsModalOpen] = useState(false);
-
-	useEffect(() => {
-		fetchMovies();
-	}, []);
 
 	const roundUpToOneDecimalPlace = (num) => {
 		return Math.ceil(num * 10) / 10;
 	};
 
-	const fetchMovies = async () => {
+	const fetchMovies = useCallback(async () => {
 		try {
 			const token = localStorage.getItem("token");
 			const response = await fetch(
@@ -32,7 +31,9 @@ const Watchlist = () => {
 			const normalizedMovies = data.movies.map((movie) => {
 				const rawRating = movie.score || movie.vote_average;
 				const normalizedRating =
-					rawRating && !isNaN(rawRating) ? Number(rawRating) : null;
+					rawRating && !Number.isNaN(Number(rawRating))
+						? Number(rawRating)
+						: null;
 				return {
 					id: movie.id || movie.mal_id,
 					normalizedTitle: movie.title_english || movie.title || movie.name,
@@ -51,7 +52,7 @@ const Watchlist = () => {
 		} catch (error) {
 			console.error("Error fetching movies:", error);
 		}
-	};
+	}, []);
 
 	const removeFromList = async (id) => {
 		try {
@@ -88,119 +89,141 @@ const Watchlist = () => {
 		setIsModalOpen(true);
 	};
 
+	const closeModal = () => {
+		setIsModalOpen(false);
+	};
+
+	useEffect(() => {
+		fetchMovies();
+	}, [fetchMovies]);
+
 	return (
-		<div className="min-h-screen bg-gray-900 text-gray-100 ">
+		<div className="min-h-screen bg-gray-900 text-gray-100">
 			<Navbar
 				setIsMenuVisible={setIsMenuVisible}
 				isMenuVisible={isMenuVisible}
 			/>
 			{isMenuVisible && <Popup />}
-			<h1 className="text-4xl font-bold mt-12 mb-8 text-center">Watchlist</h1>
-			<div className="overflow-x-auto no-scrollbar px-10">
-				<table className="w-full border-collapse">
-					<thead>
-						<tr className="bg-gray-800">
-							<th className="p-3 text-left">#</th>
-							<th className="p-3 text-left">Title</th>
-							<th className="p-3 text-left">Rating</th>
-							<th className="p-3 text-left">Actions</th>
-						</tr>
-					</thead>
-					<tbody>
-						{currentMovies.map((movie, index) => (
-							<tr
-								key={movie.id}
-								className="border-b border-gray-700 hover:bg-gray-800"
-							>
-								<td className="p-3">{indexOfFirstMovie + index + 1}</td>
-								<td className="p-3 flex items-center">
-									<img
-										src={movie.normalizedImageUrl || "/placeholder.svg"}
-										alt={movie.normalizedTitle}
-										className="w-12 h-16 object-cover mr-3"
-									/>
-									<button
-										type="button"
-										className="text-left hover:text-blue-400 focus:outline-none focus:ring-2 focus:ring-blue-400 rounded"
-										onClick={() => openModal(movie)}
-									>
-										{movie.normalizedTitle}
-									</button>
-								</td>
-								<td className="p-3">
-									{movie.normalizedRating !== null
-										? roundUpToOneDecimalPlace(movie.normalizedRating)
-										: "N/A"}
-								</td>
-								<td className="p-3">
-									<button
-										type="button"
-										onClick={() => removeFromList(movie.id)}
-										className="bg-red-600 hover:bg-red-700 text-white py-1 px-3 rounded focus:outline-none focus:ring-2 focus:ring-red-500"
-										aria-label={`Remove ${movie.normalizedTitle} from watchlist`}
-									>
-										Remove
-									</button>
-								</td>
-							</tr>
-						))}
-					</tbody>
-				</table>
-			</div>
-			<div className="mt-4 flex justify-center">
-				{Array.from(
-					{ length: Math.ceil(movies.length / moviesPerPage) },
-					(_, i) => (
-						<button
-							type="button"
-							key={i}
-							onClick={() => paginate(i + 1)}
-							className={`mx-1 px-3 py-1 rounded focus:outline-none focus:ring-2 focus:ring-blue-400 ${
-								currentPage === i + 1
-									? "bg-blue-600 text-white"
-									: "bg-gray-700 text-gray-300 hover:bg-gray-600"
-							}`}
-							aria-label={`Go to page ${i + 1}`}
-						>
-							{i + 1}
-						</button>
-					),
+
+			<div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+				<h1 className="text-4xl font-bold mb-8 text-center">My Watchlist</h1>
+
+				{movies.length === 0 ? (
+					<div className="flex flex-col items-center justify-center py-16 text-center">
+						<div className="bg-gray-800 p-8 rounded-lg shadow-lg max-w-md">
+							<h2 className="text-2xl font-semibold mb-4">
+								Your watchlist is empty
+							</h2>
+							<p className="text-gray-400 mb-6">
+								Start adding movies and shows to build your collection!
+							</p>
+						</div>
+					</div>
+				) : (
+					<>
+						<div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 no-scrollbar">
+							{currentMovies.map((movie) => (
+								<div
+									key={movie.id}
+									className="bg-gray-800 rounded-lg overflow-hidden shadow-lg transition duration-300 hover:shadow-2xl hover:transform hover:-translate-y-1"
+								>
+									<div className="relative group">
+										<div className="aspect-[2/3] overflow-hidden">
+											<img
+												src={movie.normalizedImageUrl || "/placeholder.svg"}
+												alt={movie.normalizedTitle}
+												className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+											/>
+										</div>
+
+										<div className="absolute top-0 right-0 p-2">
+											{movie.normalizedRating && (
+												<div className="bg-yellow-500 text-black font-bold rounded-full w-10 h-10 flex items-center justify-center">
+													{roundUpToOneDecimalPlace(movie.normalizedRating)}
+												</div>
+											)}
+										</div>
+
+										<div className="absolute inset-0 bg-gradient-to-t from-black/90 to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex flex-col justify-end p-4">
+											<button
+												type="button"
+												onClick={() => openModal(movie)}
+												className="bg-blue-600/80 hover:bg-blue-700 text-white py-2 px-4 rounded-full mb-3 flex items-center justify-center gap-2 backdrop-blur-sm"
+											>
+												<Info size={18} />
+												<span>Details</span>
+											</button>
+											<button
+												type="button"
+												onClick={() => removeFromList(movie.id)}
+												className="bg-red-600/80 hover:bg-red-700 text-white py-2 px-4 rounded-full flex items-center justify-center gap-2 backdrop-blur-sm"
+												aria-label={`Remove ${movie.normalizedTitle} from watchlist`}
+											>
+												<Trash2 size={18} />
+												<span>Remove</span>
+											</button>
+										</div>
+									</div>
+
+									<div className="p-4">
+										<button
+											type="button"
+											className="font-bold text-lg mb-1 line-clamp-1 text-left w-full hover:text-blue-400"
+											onClick={() => openModal(movie)}
+											onKeyDown={(e) => e.key === "Enter" && openModal(movie)}
+										>
+											{movie.normalizedTitle}
+										</button>
+										<div className="flex items-center text-yellow-500">
+											<Star size={16} className="fill-current" />
+											<span className="ml-1 text-sm font-medium">
+												{movie.normalizedRating !== null
+													? roundUpToOneDecimalPlace(movie.normalizedRating)
+													: "N/A"}
+											</span>
+										</div>
+									</div>
+								</div>
+							))}
+						</div>
+
+						{/* Pagination */}
+						{Math.ceil(movies.length / moviesPerPage) > 1 && (
+							<div className="mt-12 flex justify-center">
+								<div className="inline-flex rounded-md shadow-sm bg-gray-800 p-1">
+									{Array.from(
+										{ length: Math.ceil(movies.length / moviesPerPage) },
+										(_, i) => (
+											<button
+												type="button"
+												key={`page-${i + 1}`}
+												onClick={() => paginate(i + 1)}
+												className={`min-w-[40px] h-10 flex items-center justify-center mx-1 rounded-md transition-colors ${
+													currentPage === i + 1
+														? "bg-blue-600 text-white"
+														: "text-gray-300 hover:bg-gray-700"
+												}`}
+												aria-label={`Go to page ${i + 1}`}
+											>
+												{i + 1}
+											</button>
+										),
+									)}
+								</div>
+							</div>
+						)}
+					</>
 				)}
 			</div>
-			{isModalOpen && selectedMovie && (
-				<div
-					className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4"
-					role="dialog"
-					aria-modal="true"
-				>
-					<div className="bg-gray-800 p-6 rounded-lg max-w-2xl w-full">
-						<h2 className="text-2xl font-bold mb-4">
-							{selectedMovie.normalizedTitle}
-						</h2>
-						<img
-							src={selectedMovie.normalizedImageUrl || "/placeholder.svg"}
-							alt={selectedMovie.normalizedTitle}
-							className="w-32 h-48 object-cover float-left mr-4 mb-2"
-						/>
-						<p className="text-gray-300 mb-4">
-							{selectedMovie.synopsis || selectedMovie.overview}
-						</p>
-						<p className="text-gray-300">
-							Rating:{" "}
-							{selectedMovie.normalizedRating !== null
-								? roundUpToOneDecimalPlace(selectedMovie.normalizedRating)
-								: "N/A"}
-						</p>
-						<button
-							type="button"
-							onClick={() => setIsModalOpen(false)}
-							className="mt-4 bg-blue-600 hover:bg-blue-700 text-white py-2 px-4 rounded focus:outline-none focus:ring-2 focus:ring-blue-400"
-						>
-							Close
-						</button>
-					</div>
-				</div>
-			)}
+
+			{/* Use the MovieDetailModal component instead of inline modal */}
+			<MovieDetailModal
+				movie={selectedMovie}
+				isOpen={isModalOpen}
+				onClose={closeModal}
+				onRemove={removeFromList}
+				roundUpToOneDecimalPlace={roundUpToOneDecimalPlace}
+			/>
 		</div>
 	);
 };

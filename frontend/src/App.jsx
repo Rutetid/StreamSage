@@ -7,7 +7,7 @@ import { Routes, Route } from "react-router-dom";
 
 function App() {
 	return (
-		<div className="no-scrollbar">
+		<div className="no-scrollbar bg-">
 			<Routes>
 				<Route path="/" element={<LandingPage />} />
 				<Route path="homepage" element={<HomePage />} />
