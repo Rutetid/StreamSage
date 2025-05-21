@@ -27,14 +27,14 @@ const CategoryHeader = ({ icon, title, viewMoreLink }) => {
 					{title}
 				</h2>
 			</div>
-			{viewMoreLink && (
+			{/* {viewMoreLink && (
 				<a
 					href={viewMoreLink}
 					className="text-primary flex items-center text-sm hover:text-primary/80 transition-colors duration-200"
 				>
 					View more <ChevronRight className="w-4 h-4 ml-1" />
 				</a>
-			)}
+			)} */}
 		</div>
 	);
 };
@@ -58,7 +58,7 @@ const HomePage = () => {
 						title="Trending Now"
 						viewMoreLink="/trending"
 					/>
-					<div className="rounded-xl overflow-hidden shadow-lg">
+					<div className="rounded-xl overflow-hidden  ring-gray-800/50 dark:ring-white/10">
 						<Trending autoSlideInterval={5000} />
 					</div>
 				</div>

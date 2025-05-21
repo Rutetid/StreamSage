@@ -1,21 +1,24 @@
 import React, { useState, useEffect, useCallback } from "react";
 import Navbar from "../Home Page/Navbar";
-import { Trash2, Star, Info } from "lucide-react"; 
-import MovieDetailModal from "./MovieDetailModal"; 
+import Popup from "../Home Page/Popup";
+import { Trash2, Star, Info, Loader2 } from "lucide-react";
+import MovieDetailModal from "./MovieDetailModal";
 
 const Watchlist = () => {
 	const [isMenuVisible, setIsMenuVisible] = useState(false);
 	const [movies, setMovies] = useState([]);
 	const [currentPage, setCurrentPage] = useState(1);
-	const [moviesPerPage] = useState(8); 
+	const [moviesPerPage] = useState(8);
 	const [selectedMovie, setSelectedMovie] = useState(null);
 	const [isModalOpen, setIsModalOpen] = useState(false);
+	const [isLoading, setIsLoading] = useState(true);
 
 	const roundUpToOneDecimalPlace = (num) => {
 		return Math.ceil(num * 10) / 10;
 	};
 
 	const fetchMovies = useCallback(async () => {
+		setIsLoading(true);
 		try {
 			const token = localStorage.getItem("token");
 			const response = await fetch(
@@ -49,8 +52,13 @@ const Watchlist = () => {
 				};
 			});
 			setMovies(normalizedMovies);
+			// Add a small delay to ensure the loading animation is seen
+			setTimeout(() => {
+				setIsLoading(false);
+			}, 800);
 		} catch (error) {
 			console.error("Error fetching movies:", error);
+			setIsLoading(false);
 		}
 	}, []);
 
@@ -108,7 +116,19 @@ const Watchlist = () => {
 			<div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
 				<h1 className="text-4xl font-bold mb-8 text-center">My Watchlist</h1>
 
-				{movies.length === 0 ? (
+				{isLoading ? (
+					<div className="flex flex-col items-center justify-center py-16">
+						<div className="relative w-24 h-24">
+							<div className="absolute inset-0 flex items-center justify-center">
+								<Loader2 size={48} className="animate-spin text-blue-500" />
+							</div>
+							<div className="absolute inset-0 rounded-full border-t-4 border-blue-600 animate-ping opacity-20" />
+						</div>
+						<p className="mt-6 text-xl text-gray-300 font-medium">
+							Loading your watchlist...
+						</p>
+					</div>
+				) : movies.length === 0 ? (
 					<div className="flex flex-col items-center justify-center py-16 text-center">
 						<div className="bg-gray-800 p-8 rounded-lg shadow-lg max-w-md">
 							<h2 className="text-2xl font-semibold mb-4">
