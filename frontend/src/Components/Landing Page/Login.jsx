@@ -34,102 +34,123 @@ const Login = () => {
 	};
 
 	return (
-		<div>
-			<section className="bg-gray-50 dark:bg-background">
-				<div className="flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0">
-					<a
-						href="/"
-						className="flex items-center mb-6 text-4xl 3xl:text-5xl font-koulen font-bold text-text"
-					>
-						STREAMSAGE
-					</a>
-					<div className="w-full bg-white rounded-lg shadow dark:border md:mt-0 sm:max-w-md xl:p-0 dark:bg-bglight dark:border-gray-900">
-						<div className="p-6 space-y-4 md:space-y-6 sm:p-8">
-							<h1 className="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white">
-								Login to your account
+		<div className="min-h-screen flex flex-col">
+			<section className="bg-gray-50 dark:bg-background flex-1 flex items-center justify-center py-6 px-4 sm:px-6 lg:px-8">
+				<div className="w-full max-w-md space-y-8">
+					<div className="text-center">
+						<Link to="/" className="inline-block">
+							<h1 className="text-3xl sm:text-4xl 3xl:text-5xl font-koulen font-bold text-text mt-6 mb-6">
+								STREAMSAGE
 							</h1>
-							<form
-								className="space-y-4 md:space-y-6"
-								action="#"
-								onSubmit={handleSubmit}
-							>
-								<div>
-									<label
-										htmlFor="email"
-										className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-									>
-										Your email
-									</label>
+						</Link>
+						<h2 className="mt-4 text-xl sm:text-2xl font-bold text-text">
+							Login to your account
+						</h2>
+						<p className="mt-2 text-sm text-gray-400">
+							Access your watchlist and favorites
+						</p>
+					</div>
+
+					<div className="mt-8 bg-bglight sm:rounded-lg shadow-md px-4 py-6 sm:px-8 sm:py-8 border border-gray-800">
+						<form className="space-y-5" onSubmit={handleSubmit}>
+							<div>
+								<label
+									htmlFor="email"
+									className="block text-sm font-medium text-gray-200 mb-1"
+								>
+									Email address
+								</label>
+								<div className="mt-1">
 									<input
-										type="email"
-										name="email"
 										id="email"
-										className="bg-gray-50 border border-gray-300 text-gray-900 rounded-lg focus:ring-primary focus:border-primary block w-full p-2.5 dark:bg-text dark:border-gray-600 dark:placeholder-gray-400  dark:focus:ring-blue-500 dark:focus:border-blue-500"
-										placeholder="name@company.com"
-										required=""
+										name="email"
+										type="email"
+										autoComplete="email"
+										required
+										className="appearance-none block w-full px-3 py-3 border border-gray-600 rounded-md shadow-sm placeholder-gray-400 bg-gray-800 text-white focus:outline-none focus:ring-primary focus:border-primary text-sm"
+										placeholder="you@example.com"
 										onChange={(e) => setUsername(e.target.value)}
 									/>
 								</div>
-								<div>
-									<label
-										htmlFor="password"
-										className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-									>
-										Password
-									</label>
+							</div>
+
+							<div>
+								<label
+									htmlFor="password"
+									className="block text-sm font-medium text-gray-200 mb-1"
+								>
+									Password
+								</label>
+								<div className="mt-1">
 									<input
-										type="password"
-										name="password"
 										id="password"
+										name="password"
+										type="password"
+										autoComplete="current-password"
+										required
+										className="appearance-none block w-full px-3 py-3 border border-gray-600 rounded-md shadow-sm placeholder-gray-400 bg-gray-800 text-white focus:outline-none focus:ring-primary focus:border-primary text-sm"
 										placeholder="••••••••"
-										className="bg-gray-50 border border-gray-300 text-gray-900 rounded-lg focus:ring-primary focus:border-primary block w-full p-2.5 dark:bg-text dark:border-gray-600 dark:placeholder-gray-400  dark:focus:ring-blue-500 dark:focus:border-blue-500"
-										required=""
 										onChange={(e) => setPassword(e.target.value)}
 									/>
 								</div>
-								<div className="flex items-center justify-between">
-									<div className="flex items-start">
-										<div className="flex items-center h-5">
-											<input
-												id="remember"
-												aria-describedby="remember"
-												type="checkbox"
-												className="w-4 h-4 border border-gray-300 rounded bg-gray-50 focus:ring-3 focus:ring-primary dark:bg-gray-700 dark:border-gray-600 dark:focus:ring-primary dark:ring-offset-gray-800"
-												required=""
-											/>
-										</div>
-										<div className="ml-3 text-sm">
-											<label
-												htmlFor="remember"
-												className="text-gray-500 dark:text-gray-300"
-											>
-												Remember me
-											</label>
-										</div>
-									</div>
+							</div>
+
+							<div className="flex items-center justify-between">
+								<div className="flex items-center">
+									<input
+										id="remember-me"
+										name="remember-me"
+										type="checkbox"
+										className="h-4 w-4 text-primary focus:ring-primary border-gray-600 rounded bg-gray-700"
+									/>
+									<label
+										htmlFor="remember-me"
+										className="ml-2 block text-sm text-gray-300"
+									>
+										Remember me
+									</label>
+								</div>
+
+								<div className="text-sm">
 									<a
 										href="/"
-										className="text-sm font-medium text-primary hover:underline dark:text-primary"
+										className="font-medium text-primary hover:text-primary/80"
 									>
 										Forgot password?
 									</a>
 								</div>
+							</div>
+
+							<div>
 								<button
 									type="submit"
-									className="w-full text-white bg-primary hover:bg-primary focus:ring-4 focus:outline-none focus:ring-primary font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary dark:hover:bg-primary dark:focus:ring-text"
+									className="w-full flex justify-center py-3 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-primary hover:bg-primary/90 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary/50 transition-colors duration-200"
 								>
 									Sign in
 								</button>
-								<p className="text-sm font-light text-gray-500 dark:text-gray-400">
-									Don’t have an account yet?{" "}
-									<Link
-										to={"/signup"}
-										className="font-medium text-primary hover:underline dark:text-primary"
-									>
-										Sign up
-									</Link>
-								</p>
-							</form>
+							</div>
+						</form>
+
+						<div className="mt-6">
+							<div className="relative">
+								<div className="absolute inset-0 flex items-center">
+									<div className="w-full border-t border-gray-700" />
+								</div>
+								<div className="relative flex justify-center text-sm">
+									<span className="px-2 bg-bglight text-gray-400">
+										New to StreamSage?
+									</span>
+								</div>
+							</div>
+
+							<div className="mt-6 text-center">
+								<Link
+									to="/signup"
+									className="font-medium text-primary hover:text-primary/80"
+								>
+									Create an account
+								</Link>
+							</div>
 						</div>
 					</div>
 				</div>

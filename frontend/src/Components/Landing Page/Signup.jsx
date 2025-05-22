@@ -35,136 +35,165 @@ const Signup = () => {
 	};
 
 	return (
-		<div>
-			<section className="bg-gray-50 dark:bg-background min-h-screen">
-				<div className="flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0">
-					<Link
-						to="/"
-						className="flex items-center mb-6 text-4xl 3xl:text-5xl font-koulen font-bold text-text"
-					>
-						STREAMSAGE
-					</Link>
-					<div className="w-full bg-white rounded-lg shadow dark:border md:mt-0 sm:max-w-md xl:p-0 dark:bg-bglight dark:border-gray-700">
-						<div className="p-6 space-y-4 md:space-y-6 sm:p-8">
-							<h1 className="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white">
-								Create an account
+		<div className="min-h-screen flex flex-col">
+			<section className="bg-gray-50 dark:bg-background flex-1 flex items-center justify-center py-6 px-4 sm:px-6 lg:px-8">
+				<div className="w-full max-w-md space-y-8">
+					<div className="text-center">
+						<Link to="/" className="inline-block">
+							<h1 className="text-3xl sm:text-4xl 3xl:text-5xl font-koulen font-bold text-text mt-6 mb-6">
+								STREAMSAGE
 							</h1>
-							<form
-								className="space-y-4 md:space-y-6"
-								action="#"
-								onSubmit={handleSubmit}
-							>
-								<div>
-									<label
-										htmlFor="email"
-										className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-									>
-										Your email
-									</label>
+						</Link>
+						<h2 className="mt-4 text-xl sm:text-2xl font-bold text-text">
+							Create your account
+						</h2>
+						<p className="mt-2 text-sm text-gray-400">
+							Join StreamSage to track and discover content
+						</p>
+					</div>
+
+					<div className="mt-8 bg-bglight sm:rounded-lg shadow-md px-4 py-6 sm:px-8 sm:py-8 border border-gray-800">
+						<form className="space-y-5" onSubmit={handleSubmit}>
+							<div>
+								<label
+									htmlFor="email"
+									className="block text-sm font-medium text-gray-200 mb-1"
+								>
+									Email address
+								</label>
+								<div className="mt-1">
 									<input
-										type="email"
-										name="email"
 										id="email"
-										className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary focus:border-primary block w-full p-2.5 dark:bg-text dark:border-gray-600 dark:placeholder-gray-400  dark:focus:ring-blue-500 dark:focus:border-blue-500"
-										placeholder="name@company.com"
+										name="email"
+										type="email"
+										autoComplete="email"
 										required
+										className="appearance-none block w-full px-3 py-3 border border-gray-600 rounded-md shadow-sm placeholder-gray-400 bg-gray-800 text-white focus:outline-none focus:ring-primary focus:border-primary text-sm"
+										placeholder="you@example.com"
 										onChange={(e) => setUsername(e.target.value)}
 									/>
 								</div>
-								<div className="flex items-center gap-6">
-									<div>
-										<label
-											htmlFor="email"
-											className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-										>
-											First Name
-										</label>
+							</div>
+
+							<div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+								<div>
+									<label
+										htmlFor="firstname"
+										className="block text-sm font-medium text-gray-200 mb-1"
+									>
+										First Name
+									</label>
+									<div className="mt-1">
 										<input
-											type="text"
-											name="firstname"
 											id="firstname"
-											className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary focus:border-primary block w-full p-2.5 dark:bg-text dark:border-gray-600 dark:placeholder-gray-400  dark:focus:ring-blue-500 dark:focus:border-blue-500"
-											placeholder="John"
+											name="firstname"
+											type="text"
+											autoComplete="given-name"
 											required
+											className="appearance-none block w-full px-3 py-3 border border-gray-600 rounded-md shadow-sm placeholder-gray-400 bg-gray-800 text-white focus:outline-none focus:ring-primary focus:border-primary text-sm"
+											placeholder="John"
 											onChange={(e) => setFirstname(e.target.value)}
 										/>
 									</div>
-									<div>
-										<label
-											htmlFor="email"
-											className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-										>
-											Last Name
-										</label>
+								</div>
+
+								<div>
+									<label
+										htmlFor="lastname"
+										className="block text-sm font-medium text-gray-200 mb-1"
+									>
+										Last Name
+									</label>
+									<div className="mt-1">
 										<input
-											type="text"
-											name="lastname"
 											id="lastname"
-											className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary focus:border-primary block w-full p-2.5 dark:bg-text dark:border-gray-600 dark:placeholder-gray-400  dark:focus:ring-blue-500 dark:focus:border-blue-500"
-											placeholder="Doe"
+											name="lastname"
+											type="text"
+											autoComplete="family-name"
 											required
+											className="appearance-none block w-full px-3 py-3 border border-gray-600 rounded-md shadow-sm placeholder-gray-400 bg-gray-800 text-white focus:outline-none focus:ring-primary focus:border-primary text-sm"
+											placeholder="Doe"
 											onChange={(e) => setLastname(e.target.value)}
 										/>
 									</div>
 								</div>
-								<div>
-									<label
-										htmlFor="password"
-										className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-									>
-										Password
-									</label>
+							</div>
+
+							<div>
+								<label
+									htmlFor="password"
+									className="block text-sm font-medium text-gray-200 mb-1"
+								>
+									Password
+								</label>
+								<div className="mt-1">
 									<input
-										type="password"
-										name="password"
 										id="password"
-										placeholder="••••••••"
-										className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary focus:border-primary block w-full p-2.5 dark:bg-text dark:border-gray-600 dark:placeholder-gray-400  dark:focus:ring-blue-500 dark:focus:border-blue-500"
+										name="password"
+										type="password"
+										autoComplete="new-password"
 										required
+										className="appearance-none block w-full px-3 py-3 border border-gray-600 rounded-md shadow-sm placeholder-gray-400 bg-gray-800 text-white focus:outline-none focus:ring-primary focus:border-primary text-sm"
+										placeholder="••••••••"
 										onChange={(e) => setPassword(e.target.value)}
 									/>
 								</div>
-								<div className="flex items-start">
-									<div className="flex items-center h-5">
-										<input
-											id="terms"
-											aria-describedby="terms"
-											type="checkbox"
-											className="w-4 h-4 border border-gray-300 rounded bg-gray-50 focus:ring-3 focus:ring-primary dark:bg-gray-700 dark:border-gray-600 dark:focus:ring-primary dark:ring-offset-gray-800"
-											required
-										/>
-									</div>
-									<div className="ml-3 text-sm">
-										<label
-											htmlFor="terms"
-											className="font-light text-gray-500 dark:text-gray-300"
-										>
-											I accept the{" "}
-											<a
-												className="font-medium text-primary hover:underline dark:text-primary"
-												href="https://github.com/Rutetid/StreamSage/blob/main/frontend/T%26C.md"
-											>
-												Terms and Conditions
-											</a>
-										</label>
-									</div>
-								</div>
+							</div>
+
+							<div className="flex items-center">
+								<input
+									id="terms"
+									name="terms"
+									type="checkbox"
+									required
+									className="h-4 w-4 text-primary focus:ring-primary border-gray-600 rounded bg-gray-700"
+								/>
+								<label
+									htmlFor="terms"
+									className="ml-2 block text-sm text-gray-300"
+								>
+									I accept the{" "}
+									<a
+										href="https://github.com/Rutetid/StreamSage/blob/main/frontend/T%26C.md"
+										className="text-primary hover:text-primary/80"
+										target="_blank"
+										rel="noopener noreferrer"
+									>
+										Terms and Conditions
+									</a>
+								</label>
+							</div>
+
+							<div>
 								<button
 									type="submit"
-									className="w-full bg-primary hover:bg-primary focus:	ring-4 focus:outline-none focus:ring-primary font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary dark:hover:bg-primary dark:focus:ring-primary"
+									className="w-full flex justify-center py-3 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-primary hover:bg-primary/90 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary/50 transition-colors duration-200"
 								>
-									Create an account
+									Create account
 								</button>
-								<p className="text-sm font-light text-gray-500 dark:text-gray-400">
-									Already have an account?{" "}
-									<Link
-										to={"/login"}
-										className="font-medium text-primary hover:underline dark:text-primary"
-									>
-										Login here
-									</Link>
-								</p>
-							</form>
+							</div>
+						</form>
+
+						<div className="mt-6">
+							<div className="relative">
+								<div className="absolute inset-0 flex items-center">
+									<div className="w-full border-t border-gray-700" />
+								</div>
+								<div className="relative flex justify-center text-sm">
+									<span className="px-2 bg-bglight text-gray-400">
+										Already have an account?
+									</span>
+								</div>
+							</div>
+
+							<div className="mt-6 text-center">
+								<Link
+									to="/login"
+									className="font-medium text-primary hover:text-primary/80"
+								>
+									Sign in instead
+								</Link>
+							</div>
 						</div>
 					</div>
 				</div>
