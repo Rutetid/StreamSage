@@ -40,7 +40,7 @@ export default function Trending({
 
 	useEffect(() => {
 		setCurr(0);
-	}, [movies]);
+	}, []);
 
 	const addToList = (movie) => {
 		fetch("https://streamsage0.onrender.com/api/v1/watchlist/add", {
