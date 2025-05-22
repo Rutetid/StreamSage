@@ -50,15 +50,15 @@ const HomePage = () => {
 			{isMenuVisible && <Popup setIsMenuVisible={setIsMenuVisible} toggleMenu={() => setIsMenuVisible(false)} />}
 
 			{/* Main content container with no extra top margin to avoid white line */}
-			<div className="max-w-screen-2xl mx-auto pt-10">
+			<div className="max-w-screen-2xl mx-auto pt-2 sm:pt-4">
 				{/* Trending section with CategoryHeader component */}
-				<div className="px-4 pb-2">
+				<div className="px-1 sm:px-2 md:px-4 pb-2">
 					<CategoryHeader
 						icon={TrendingUp}
 						title="Trending Now"
 						viewMoreLink="/trending"
 					/>
-					<div className="rounded-xl overflow-hidden  ring-gray-800/50 dark:ring-white/10">
+					<div className="rounded-xl overflow-hidden ring-gray-800/50 dark:ring-white/10">
 						<Trending autoSlideInterval={5000} />
 					</div>
 				</div>
